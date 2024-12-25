@@ -1,0 +1,51 @@
+<?= $this->extend('layout/main') ?>
+
+<?= $this->section('content') ?>
+<h1>Estoque</h1>
+<a href="/inventory/new" class="btn btn-primary mb-3">Adicionar Novo Item</a>
+
+<form action="/inventory" method="get" class="mb-3">
+    <div class="input-group">
+        <input type="text" class="form-control" placeholder="Pesquisar..." name="search" value="<?= $_GET['search'] ?? '' ?>">
+        <button class="btn btn-outline-secondary" type="submit">Pesquisar</button>
+    </div>
+</form>
+
+<?php if (!empty($lowStockItems)): ?>
+<div class="alert alert-warning">
+    <strong>Baixo Estoque:</strong>
+    <?php foreach ($lowStockItems as $item): ?>
+        <span class="badge bg-warning text-dark"><?= $item['name'] ?> (<?= $item['quantity'] ?>)</span>
+    <?php endforeach; ?>
+</div>
+<?php endif; ?>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th><a href="?order_by=id&order_dir=<?= ($_GET['order_by'] ?? '') == 'id' && ($_GET['order_dir'] ?? '') == 'asc' ? 'desc' : 'asc' ?>">ID</a></th>
+            <th><a href="?order_by=name&order_dir=<?= ($_GET['order_by'] ?? '') == 'name' && ($_GET['order_dir'] ?? '') == 'asc' ? 'desc' : 'asc' ?>">Nome</a></th>
+            <th><a href="?order_by=quantity&order_dir=<?= ($_GET['order_by'] ?? '') == 'quantity' && ($_GET['order_dir'] ?? '') == 'asc' ? 'desc' : 'asc' ?>">Quantidade</a></th>
+            <th><a href="?order_by=purchase_price&order_dir=<?= ($_GET['order_by'] ?? '') == 'purchase_price' && ($_GET['order_dir'] ?? '') == 'asc' ? 'desc' : 'asc' ?>">Preço</a></th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php foreach ($inventory as $item): ?>
+        <tr <?= $item['quantity'] <= $item['low_stock_threshold'] ? 'class="table-warning"' : '' ?>>
+            <td><?= $item['id'] ?></td>
+            <td><?= $item['name'] ?></td>
+            <td><?= $item['quantity'] ?> <?= $item['unit'] ?></td>
+            <td>R$ <?= number_format($item['purchase_price'], 2,",",".") ?></td>
+            <td>
+                <a href="/inventory/edit/<?= $item['id'] ?>" class="btn btn-sm btn-warning">Editar</a>
+                <a href="/inventory/delete/<?= $item['id'] ?>" class="btn btn-sm btn-danger" onclick="return confirm('Você tem certeza?')">Excluir</a>
+                <a href="/inventory/history/<?= $item['id'] ?>" class="btn btn-sm btn-info">Histórico</a>
+            </td>
+        </tr>
+        <?php endforeach; ?>
+    </tbody>
+</table>
+
+<?= $pager->links() ?>
+<?= $this->endSection() ?>
