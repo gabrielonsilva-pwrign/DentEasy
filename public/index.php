@@ -54,3 +54,12 @@ $paths = new Config\Paths();
 require $paths->systemDirectory . '/Boot.php';
 
 exit(CodeIgniter\Boot::bootWeb($paths));
+
+
+/*
+*
+* USE .ENV VARIABLES
+*
+*/
+$dotenv = Dotenv\Dotenv::createMutable(APPATH);
+$dotenv->load();
