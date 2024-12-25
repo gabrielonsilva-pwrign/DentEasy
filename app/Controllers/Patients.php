@@ -4,16 +4,19 @@ namespace App\Controllers;
 
 use App\Models\PatientModel;
 use App\Models\TreatmentModel;
+use App\Models\AppointmentModel;
 
 class Patients extends BaseController
 {
     protected $patientModel;
     protected $treatmentModel;
+    protected $appointmentModel;
 
     public function __construct()
     {
         $this->patientModel = new PatientModel();
         $this->treatmentModel = new TreatmentModel();
+        $this->appointmentModel = new AppointmentModel();
     }
 
     public function index()
@@ -86,8 +89,12 @@ class Patients extends BaseController
     public function treatmentHistory($id = null)
     {
         $data['patient'] = $this->patientModel->find($id);
-        $data['treatments'] = $this->treatmentModel->where('patient_id', $id)
-            ->orderBy('created_at', 'DESC')
+        #$data['treatments'] = $this->treatmentModel->where('treatments.treatment_id', $id)->join('appointments','appointments.id = treatments.appointment_id', 'left')
+        #    ->orderBy('treatments.created_at', 'DESC')
+        #    ->findAll();
+        $data['treatments'] = $this->appointmentModel->where('appointments.patient_id', $id)
+            ->join('treatments','treatments.appointment_id = appointments.id','right')
+            ->orderBy('treatments.created_at','DESC')
             ->findAll();
         
         if(count($data['treatments']) > 0)  {

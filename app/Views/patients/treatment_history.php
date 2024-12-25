@@ -16,7 +16,7 @@
     <tbody>
         <?php foreach ($treatments as $treatment): ?>
         <tr>
-            <td><?= $treatment['created_at'] ?></td>
+            <td><?= date('d/m/Y H:i', strtotime($treatment['created_at'])) ?></td>
             <td><?= $treatment['title'] ?></td>
             <td>R$ <?= number_format($treatment['value'], 2, ',','.') ?></td>
             <td><?= ucfirst(str_replace('_', ' ', $treatment['payment_method'])) ?></td>
