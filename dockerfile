@@ -15,7 +15,7 @@ RUN chown -R www-data:www-data /var/www/html && a2enmod rewrite && a2enmod heade
 
 RUN service apache2 restart
 
-WORKDIR /var/www/html
+WORKDIR /var/www/html/public
 
 EXPOSE 80
 EXPOSE 443
