@@ -7,3 +7,4 @@ writable/session/
 public/uploads/
 .DS_Store
 deploy.sh
+docker-compose.yaml

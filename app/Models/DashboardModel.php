@@ -54,6 +54,7 @@ class DashboardModel extends Model
                 FROM appointments a
                 JOIN patients p ON a.patient_id = p.id
                 WHERE a.start_time BETWEEN NOW() AND DATE_ADD(NOW(), INTERVAL 7 DAY)
+                AND a.status = 'Agendado'
                 ORDER BY a.start_time ASC
             ");
 
