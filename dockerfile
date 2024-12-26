@@ -13,10 +13,6 @@ RUN docker-php-ext-install mysqli pdo pdo_mysql mbstring gd intl
 
 RUN docker-php-ext-configure intl
 
-RUN mkdir /var/www/html/writable/cache
-
-RUN mkdir /var/wwww/html/public/uploads
-
 RUN chown -R www-data:www-data /var/www/html && a2enmod rewrite && a2enmod headers proxy_http
 
 RUN service apache2 restart

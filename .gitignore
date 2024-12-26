@@ -1,10 +1,10 @@
 .env
 .vscode/
-writable/cache/
-writable/debugbar/
-writable/logs/
-writable/session/
-public/uploads/
+writable/cache/*
+writable/debugbar/*
+writable/logs/*
+writable/session/*
+public/uploads/*
 .DS_Store
 deploy.sh
 docker-compose.yaml

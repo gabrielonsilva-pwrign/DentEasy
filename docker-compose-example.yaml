@@ -1,0 +1,64 @@
+services:
+  dentEasy:
+    image: ghcr.io/gabrielonsilva-pwrign/denteasy:main
+    command: bash -c "php spark migrate && php spark db:seed"
+    volumes:
+      - denteasy_files:/var/www/html
+    restart: "unless-stopped"
+    links:
+      - denteasydb
+    networks:
+      - ${NETWORK}
+    environment:
+      admin_name: "${Admin_Name}"
+      admin_email: "${Admin_Email}"
+      admin_password: "${Admin_Passowrd}"
+      database_default_hostname: denteasydb
+      database_default_database: dental_clinic
+      database_default_username: root
+      database_default_password: ${DB_Password}
+      logger_threshold: 5
+      app_baseURL: "${App_URL}"
+
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints:
+          - node.role == manager
+      labels:
+        - traefik.enable=1
+        - traefik.http.routers.denteasy.rule=Host(`${App_URL}`) ## Url da aplicação
+        - traefik.http.routers.denteasy.entrypoints=websecure
+        - traefik.http.routers.denteasy.priority=1
+        - traefik.http.routers.denteasy.tls.certresolver=letsencryptresolver
+        - traefik.http.routers.denteasy.service=denteasy
+        - traefik.http.services.denteasy.loadbalancer.server.port=80
+        - traefik.http.services.denteasy.loadbalancer.passHostHeader=true
+
+
+  denteasydb:
+    image: mysql:latest
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_Password}
+      MYSQL_DATABASE: dental_clinic
+    ports:
+      - "3306:3306"
+    networks:
+      - ${NETWORK}
+    volumes:
+      - denteasy_database:/var/lib/mysql
+
+volumes:
+  denteasy_files:
+    external: true
+    name: denteasy_files
+  denteasy_database:
+    external: true
+    name: denteasy_database
+
+networks:
+  ${NETWORK}: ## Nome da rede interna
+    name: ${NETWORK} ## Nome da rede interna
+    external: true
