@@ -21,9 +21,5 @@ RUN service apache2 restart
 
 WORKDIR /var/www/html
 
-RUN php spark migrate
-
-RUN php spark db:seed
-
 EXPOSE 80
 EXPOSE 443
