@@ -5,6 +5,8 @@ RUN apt-get update && \
 
 RUN apt-get install -y curl vim wget git curl libgdal-dev build-essential libssl-dev zlib1g-dev libpng-dev libjpeg-dev libfreetype6-dev libonig-dev libicu-dev
 
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+
 COPY . /var/www/html
 
 COPY /docker/denteasy.conf /etc/apache2/sites-enabled/000-default.conf
@@ -18,6 +20,10 @@ RUN chown -R www-data:www-data /var/www/html && a2enmod rewrite && a2enmod heade
 RUN service apache2 restart
 
 WORKDIR /var/www/html
+
+RUN php spark migrate
+
+RUN php spark db:seed
 
 EXPOSE 80
 EXPOSE 443
