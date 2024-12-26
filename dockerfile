@@ -7,7 +7,7 @@ RUN apt-get install -y curl vim wget git curl libgdal-dev build-essential libssl
 
 COPY . /var/www/html
 
-COPY /docker/denteasy.conf /etc/apache2/sites-enabled/denteasy.conf
+COPY /docker/denteasy.conf /etc/apache2/sites-enabled/000-default.conf
 
 RUN docker-php-ext-install mysqli pdo pdo_mysql mbstring gd intl
 
