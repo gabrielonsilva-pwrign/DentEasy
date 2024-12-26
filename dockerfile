@@ -7,6 +7,8 @@ RUN apt-get install -y curl vim wget git curl libgdal-dev build-essential libssl
 
 COPY . /var/www/html
 
+COPY /docker/denteasy.conf /etc/apache2/sites-enabled/denteasy.conf
+
 RUN docker-php-ext-install mysqli pdo pdo_mysql mbstring gd intl
 
 RUN docker-php-ext-configure intl
@@ -15,7 +17,7 @@ RUN chown -R www-data:www-data /var/www/html && a2enmod rewrite && a2enmod heade
 
 RUN service apache2 restart
 
-WORKDIR /var/www/html/public
+WORKDIR /var/www/html
 
 EXPOSE 80
 EXPOSE 443
