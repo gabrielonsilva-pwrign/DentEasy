@@ -22,13 +22,11 @@ RUN docker-php-ext-configure intl && docker-php-ext-configure gd
 
 RUN docker-php-ext-enable mysqli && docker-php-ext-enable gd && docker-php-ext-enable intl && docker-php-ext-enable opcache
 
-RUN chown -R www-data:www-data /var/www/html && a2enmod rewrite && a2enmod headers proxy_http
-
 RUN echo "upload_max_filesize = 100M" > /usr/local/etc/php/conf.d/uploads.ini
 
 RUN echo "post_max_size = 100M" >> /usr/local/etc/php/conf.d/uploads.ini
 
-ARG uid
+ARG uid=1000
 
 RUN useradd -G www-data,root -u $uid -d /home/denteasy denteasy
 
@@ -37,6 +35,8 @@ RUN mkdir -p /home/denteasy/.composer && chown -R denteasy:denteasy /home/dentea
 RUN service apache2 restart
 
 WORKDIR /var/www/html
+
+RUN chown -R denteasy:denteasy /var/www/html && a2enmod rewrite && a2enmod headers proxy_http
 
 USER www-data
 
