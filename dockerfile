@@ -36,7 +36,7 @@ RUN service apache2 restart
 
 WORKDIR /var/www/html
 
-RUN chown -R denteasy:denteasy /var/www/html && a2enmod rewrite && a2enmod headers proxy_http
+RUN chown -R www-data:www-data /var/www/html && a2enmod rewrite && a2enmod headers proxy_http
 
 USER www-data
 
