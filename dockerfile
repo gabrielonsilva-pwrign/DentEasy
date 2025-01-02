@@ -32,6 +32,10 @@ RUN chmod -R 755 /var/www/html
 
 RUN mkdir -p /var/www/.composer
 
+RUN chown -R www-data:www-data /var/www/.composer
+
+RUN chmod -R 755 /var/www/.composer
+
 RUN composer self-update --stable && composer update
 
 RUN service apache2 restart
