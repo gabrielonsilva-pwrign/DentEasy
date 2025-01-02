@@ -28,6 +28,8 @@ RUN echo "post_max_size = 100M" >> /usr/local/etc/php/conf.d/uploads.ini
 
 RUN chown -R www-data:www-data /var/www/html && a2enmod rewrite && a2enmod headers proxy_http
 
+RUN chmod -R 755 /var/www/html
+
 RUN mkdir -p /var/www/.composer
 
 RUN composer self-update --stable && composer update
