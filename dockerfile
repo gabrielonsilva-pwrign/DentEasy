@@ -18,7 +18,7 @@ COPY /docker/denteasy.conf /etc/apache2/sites-enabled/000-default.conf
 
 RUN docker-php-ext-install intl opcache pdo_mysql mysqli pdo mbstring zip gd && docker-php-ext-enable mysqli
 
-RUN docker-php-ext-configure intl  \
+RUN docker-php-ext-configure intl \
     && docker-php-ext-configure gd --with-freetype=/usr/include/ --with-jpeg=/usr/include/ --with-png=/usr/include/
 
 RUN chown -R www-data:www-data /var/www/html && a2enmod rewrite && a2enmod headers proxy_http
