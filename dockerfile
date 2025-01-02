@@ -1,4 +1,4 @@
-FROM php:8.2.27-apache
+FROM php:8.2.27-cli
 
 RUN apt-get update && \
     apt-get install -y
@@ -10,11 +10,11 @@ RUN apt-get install -y curl vim wget git curl libgdal-dev \
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf
+#RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf
 
 COPY . /var/www/html
 
-COPY /docker/denteasy.conf /etc/apache2/sites-enabled/000-default.conf
+#COPY /docker/denteasy.conf /etc/apache2/sites-enabled/000-default.conf
 
 RUN docker-php-ext-install intl opcache pdo_mysql mysqli pdo mbstring zip gd
 
@@ -24,15 +24,15 @@ RUN docker-php-ext-enable mysqli && docker-php-ext-enable gd && docker-php-ext-e
 
 #RUN chown -R www-data:www-data /var/www/html && a2enmod rewrite && a2enmod headers proxy_http
 
-RUN a2enmod rewrite && a2enmod headers proxy_http
+#RUN a2enmod rewrite && a2enmod headers proxy_http
 
 RUN echo "upload_max_filesize = 100M" > /usr/local/etc/php/conf.d/uploads.ini
 
 RUN echo "post_max_size = 100M" >> /usr/local/etc/php/conf.d/uploads.ini
 
-RUN service apache2 restart
+#RUN service apache2 restart
 
-#WORKDIR /var/www/html
+WORKDIR /var/www/html
 
 #USER www-data
 
