@@ -3,11 +3,11 @@
         'name' => 'power-iguana/denteasy-app',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => 'c4b757a748bc2a204cd53f38ebe35e8733d46108',
+        'reference' => '2be6b255939fe54379cd642ae79e2377b040c7ad',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'dev' => true,
+        'dev' => false,
     ),
     'versions' => array(
         'codeigniter4/framework' => array(
@@ -31,7 +31,7 @@
         'power-iguana/denteasy-app' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => 'c4b757a748bc2a204cd53f38ebe35e8733d46108',
+            'reference' => '2be6b255939fe54379cd642ae79e2377b040c7ad',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
