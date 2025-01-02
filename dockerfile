@@ -16,13 +16,10 @@ COPY . /var/www/html
 
 COPY /docker/denteasy.conf /etc/apache2/sites-enabled/000-default.conf
 
-RUN docker-php-ext-install intl bz2 bcmath opcache calendar pdo_mysql mysqli \
-    pdo mbstring zip gd
+RUN docker-php-ext-install intl opcache pdo_mysql mysqli pdo mbstring zip gd && docker-php-ext-enable mysqli
 
 RUN docker-php-ext-configure intl  \
     && docker-php-ext-configure gd --with-freetype=/usr/include/ --with-jpeg=/usr/include/ --with-png=/usr/include/
-
-RUN docker-php-ext-enable mysqli
 
 RUN chown -R www-data:www-data /var/www/html && a2enmod rewrite && a2enmod headers proxy_http
 
@@ -36,7 +33,7 @@ RUN echo "post_max_size = 100M" >> /usr/local/etc/php/conf.d/uploads.ini
 
 #RUN mkdir -p /home/devuser/.composer && chown -R devuser:devuser /home/devuser
 
-RUN service apache2 restart
+#RUN service apache2 restart
 
 WORKDIR /var/www/html
 
