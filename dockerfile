@@ -34,7 +34,7 @@ RUN chown -R www-data:www-data /var/www/html && \
 
 RUN chmod -R 755 /var/www/html && \
     chmod -R 755 /var/www/.composer && \
-    chmod +x /var/www/html spark
+    chmod +x /var/www/html/denteasy spark
 
 RUN composer install && composer self-update --stable && composer update
 
