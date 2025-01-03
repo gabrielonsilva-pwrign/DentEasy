@@ -16,7 +16,7 @@ COPY . /var/www/html
 
 COPY /docker/denteasy.conf /etc/apache2/sites-enabled/000-default.conf
 
-RUN docker-php-ext-install intl opcache pdo_mysql mysqli pdo mbstring zip gd a2enmod rewrite
+RUN docker-php-ext-install intl opcache pdo_mysql mysqli pdo mbstring zip gd
 
 RUN docker-php-ext-configure intl && docker-php-ext-configure gd
 
