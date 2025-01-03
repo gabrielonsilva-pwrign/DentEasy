@@ -2,6 +2,33 @@
 
 Este aplicativo é um sistema de gerenciamento abrangente para clínicas odontológicas, criado usando o framework CodeIgniter 4 PHP. Ele inclui vários módulos para lidar com diferentes aspectos do gerenciamento da clínica.
 
+## Instalação
+
+Para instalar essa aplicação, utilize o **docker-compose-example.yaml** disponível em *docker*
+
+O compose foi criado para trabalhar com SWARM. Adapte conforme necessário caso não seja SWARM.
+
+### Variáveis ENV Aplicação
+
+- **admin_name**: "${Admin_Name}" # Nome do usuário Administrador
+- **admin_email**: "${Admin_Email}" # Email do usuário Administrador
+- **admin_password**: "${Admin_Passowrd}" # Senha do Usuário Administrador
+- **database_default_password**: ${DB_Password} # Senha do Banco de Dados (Mesma de Env Database)
+- **app_baseURL**: "${App_URL}" # URL da plataforma (https://exemplo.com.br)
+
+### Variáveis ENV Database
+- **MYSQL_ROOT_PASSWORD**: ${DB_Password} # Senha do Banco de Dados (Mesma de Env Aplicação)
+
+### Próximos Passos
+- Após subir a Stack, executar os seguintes comandos no console: 
+
+```
+php denteasy/spark migrate
+php denteasy/spark db:seed MainSeeder
+```
+
+**Atenção** Esse passo será removido em futuras versões, para facilitar o deploy
+
 ## Módulos
 
 ### 1. Autenticação

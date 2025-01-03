@@ -1,7 +1,6 @@
 services:
   dentEasy:
     image: ghcr.io/gabrielonsilva-pwrign/denteasy:main
-    command: bash -c "php spark migrate && php spark db:seed"
     volumes:
       - denteasy_files:/var/www/html
     restart: "unless-stopped"
