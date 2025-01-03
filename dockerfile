@@ -40,7 +40,7 @@ RUN composer install && composer self-update --stable && composer update
 
 RUN service apache2 restart
 
-WORKDIR /var/www/html
+#WORKDIR /var/www/html
 
 USER www-data
 
