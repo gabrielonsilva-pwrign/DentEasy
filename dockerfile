@@ -12,11 +12,9 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 
 RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf
 
-WORKDIR ../src
+COPY src/ /var/www/html/denteasy
 
-COPY . /var/www/html/denteasy
-
-COPY denteasy.conf /etc/apache2/sites-enabled/000-default.conf
+COPY docker/denteasy.conf /etc/apache2/sites-enabled/000-default.conf
 
 RUN docker-php-ext-install intl opcache pdo_mysql mysqli pdo mbstring zip gd
 
