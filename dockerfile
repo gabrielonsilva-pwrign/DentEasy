@@ -26,7 +26,11 @@ RUN docker-php-ext-enable mysqli && docker-php-ext-enable gd && \
 RUN echo "upload_max_filesize = 100M" > /usr/local/etc/php/conf.d/uploads.ini && \
     echo "post_max_size = 100M" >> /usr/local/etc/php/conf.d/uploads.ini
 
-RUN mkdir -p /var/www/.composer
+RUN mkdir -p /var/www/.composer && \
+    mkdir -p /var/www/html/denteasy/writable/logs && \
+    mkdir -p /var/www/html/denteasy/writable/cache && \
+    mkdir -p /var/www/html/denteasy/writable/session && \
+    mkdir -p /var/www/html/denteasy/writable/debugbar
 
 RUN chown -R www-data:www-data /var/www/html && \ 
     a2enmod rewrite && a2enmod headers proxy_http && \
@@ -34,8 +38,6 @@ RUN chown -R www-data:www-data /var/www/html && \
 
 RUN chmod -R 755 /var/www/html && \
     chmod -R 755 /var/www/.composer
-
-#RUN composer install && composer self-update --stable && composer update
 
 RUN service apache2 restart
 
