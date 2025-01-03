@@ -12,7 +12,7 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 
 RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf
 
-COPY src/ /var/www/html/denteasy
+COPY /src/. /var/www/html/denteasy
 
 COPY docker/denteasy.conf /etc/apache2/sites-enabled/000-default.conf
 
@@ -33,12 +33,13 @@ RUN chown -R www-data:www-data /var/www/html && \
     chown -R www-data:www-data /var/www/.composer
 
 RUN chmod -R 755 /var/www/html && \
-    chmod -R 755 /var/www/.composer && \
-    chmod +x /var/www/html/denteasy spark
+    chmod -R 755 /var/www/.composer
 
 RUN composer install && composer self-update --stable && composer update
 
 RUN service apache2 restart
+
+WORKDIR /var/www/html
 
 USER www-data
 
