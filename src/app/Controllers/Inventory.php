@@ -18,6 +18,7 @@ class Inventory extends BaseController
 
     public function index()
     {
+        $this->checkPermission('inventory','view');
         $keyword = $this->request->getGet('search') ?? '';
         $page = $this->request->getGet('page') ?? 1;
         $perPage = 20;
@@ -33,11 +34,13 @@ class Inventory extends BaseController
 
     public function new()
     {
+        $this->checkPermission('inventory','add');
         return view('inventory/create');
     }
 
     public function create()
     {
+        $this->checkPermission('inventory','add');
         $data = $this->request->getPost();
 
         if ($this->inventoryModel->insert($data)) {
@@ -55,12 +58,14 @@ class Inventory extends BaseController
 
     public function edit($id = null)
     {
+        $this->checkPermission('inventory','edit');
         $data['item'] = $this->inventoryModel->find($id);
         return view('inventory/edit', $data);
     }
 
     public function update($id = null)
     {
+        $this->checkPermission('inventory','edit');
         $data = $this->request->getPost();
         $oldItem = $this->inventoryModel->find($id);
 
@@ -81,6 +86,7 @@ class Inventory extends BaseController
 
     public function delete($id = null)
     {
+        $this->checkPermission('inventory','delete');
         if ($this->inventoryModel->delete($id)) {
             return redirect()->to('/inventory')->with('success', 'Item excluído');
         } else {
@@ -90,6 +96,7 @@ class Inventory extends BaseController
 
     public function history($id = null)
     {
+        $this->checkPermission('inventory','view');
         $data['item'] = $this->inventoryModel->find($id);
         $data['history'] = $this->inventoryHistoryModel->getHistoryForItem($id);
         return view('inventory/history', $data);

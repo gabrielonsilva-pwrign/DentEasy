@@ -18,6 +18,7 @@ class Dashboard extends BaseController
 
     public function index()
     {
+        $this->checkPermission('dashboard','view');
         $startDate = $this->request->getGet('start_date') ?? date('Y-m-d', strtotime('-30 days'));
         $endDate = $this->request->getGet('end_date') ?? date('Y-m-d');
 

@@ -21,6 +21,7 @@ class Patients extends BaseController
 
     public function index()
     {
+        $this->checkPermission('patients','view');
         $keyword = $this->request->getGet('search') ?? '';
         $page = $this->request->getGet('page') ?? 1;
         $perPage = 20;
@@ -35,11 +36,13 @@ class Patients extends BaseController
 
     public function new()
     {
+        $this->checkPermission('patients','add');
         return view('patients/create');
     }
 
     public function create()
     {
+        $this->checkPermission('patients','add');
         $data = $this->request->getPost();
 
         if ($this->patientModel->insert($data)) {
@@ -51,12 +54,14 @@ class Patients extends BaseController
 
     public function edit($id = null)
     {
+        $this->checkPermission('patients','edit');
         $data['patient'] = $this->patientModel->find($id);
         return view('patients/edit', $data);
     }
 
     public function update($id = null)
     {
+        $this->checkPermission('patients','edit');
         $data = $this->request->getPost();
         $data['id'] = $id;
 
@@ -69,6 +74,7 @@ class Patients extends BaseController
 
     public function delete($id = null)
     {
+        $this->checkPermission('patients','delete');
         if ($this->patientModel->delete($id)) {
             return redirect()->to('/patients')->with('success', 'Patient excluído');
         } else {
@@ -78,6 +84,7 @@ class Patients extends BaseController
 
     public function view($id = null)
     {
+        $this->checkPermission('patients','view');
         $patient = $this->patientModel->find($id);
         $data['patient'] = $patient;
         $data['age'] = $this->patientModel->getAge($id);
@@ -88,6 +95,7 @@ class Patients extends BaseController
 
     public function treatmentHistory($id = null)
     {
+        $this->checkPermission('patients','view');
         $data['patient'] = $this->patientModel->find($id);
         #$data['treatments'] = $this->treatmentModel->where('treatments.treatment_id', $id)->join('appointments','appointments.id = treatments.appointment_id', 'left')
         #    ->orderBy('treatments.created_at', 'DESC')

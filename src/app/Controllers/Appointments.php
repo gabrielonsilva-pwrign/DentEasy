@@ -21,6 +21,7 @@ class Appointments extends BaseController
 
     public function index()
     {
+        $this->checkPermission('appointments','view');
         $viewMode = $this->request->getGet('view') ?? 'calendar';
         $data['viewMode'] = $viewMode;
 
@@ -39,12 +40,14 @@ class Appointments extends BaseController
 
     public function new()
     {
+        $this->checkPermission('appointments','add');
         $data['patients'] = $this->patientModel->findAll();
         return view('appointments/create', $data);
     }
 
     public function create()
     {
+        $this->checkPermission('appointments','add');
         $data = $this->request->getPost();
 
         if ($appointmentId = $this->appointmentModel->insert($data)) {
@@ -70,6 +73,7 @@ class Appointments extends BaseController
 
     public function edit($id = null)
     {
+        $this->checkPermission('appointments','edit');
         $data['appointment'] = $this->appointmentModel->find($id);
         $data['patients'] = $this->patientModel->findAll();
         return view('appointments/edit', $data);
@@ -77,6 +81,7 @@ class Appointments extends BaseController
 
     public function update($id = null)
     {
+        $this->checkPermission('appointments','edit');
         $data = $this->request->getPost();
 
         if ($this->appointmentModel->update($id, $data)) {
@@ -102,6 +107,7 @@ class Appointments extends BaseController
 
     public function updateAjax($id = null)
     {
+        $this->checkPermission('appointments','edit');
         $data = $this->request->getPost();
 
         if ($this->appointmentModel->update($id, $data)) {
@@ -128,6 +134,7 @@ class Appointments extends BaseController
 
     public function delete($id = null)
     {
+        $this->checkPermission('appointments','delete');
         if ($this->appointmentModel->delete($id)) {
             return redirect()->to('/appointments')->with('success', 'Agendamento excluído');
         } else {
