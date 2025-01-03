@@ -293,7 +293,7 @@ class Builder extends BaseBuilder
      */
     protected function _like_statement(?string $prefix, string $column, ?string $not, string $bind, bool $insensitiveSearch = false): string
     {
-        $op = $insensitiveSearch === true ? 'ILIKE' : 'LIKE';
+        $op = $insensitiveSearch ? 'ILIKE' : 'LIKE';
 
         return "{$prefix} {$column} {$not} {$op} :{$bind}:";
     }
@@ -353,7 +353,7 @@ class Builder extends BaseBuilder
             $sql .= implode(
                 ",\n",
                 array_map(
-                    static fn ($key, $value) => $key . ($value instanceof RawSql ?
+                    static fn ($key, $value): string => $key . ($value instanceof RawSql ?
                             ' = ' . $value :
                             ' = ' . $that->cast($alias . '.' . $value, $that->getFieldType($table, $key))),
                     array_keys($updateFields),
@@ -368,7 +368,7 @@ class Builder extends BaseBuilder
             $sql .= 'WHERE ' . implode(
                 ' AND ',
                 array_map(
-                    static function ($key, $value) use ($table, $alias, $that) {
+                    static function ($key, $value) use ($table, $alias, $that): string|RawSql {
                         if ($value instanceof RawSql && is_string($key)) {
                             return $table . '.' . $key . ' = ' . $value;
                         }
@@ -394,8 +394,8 @@ class Builder extends BaseBuilder
             $data = implode(
                 " UNION ALL\n",
                 array_map(
-                    static fn ($value) => 'SELECT ' . implode(', ', array_map(
-                        static fn ($key, $index) => $index . ' ' . $key,
+                    static fn ($value): string => 'SELECT ' . implode(', ', array_map(
+                        static fn ($key, $index): string => $index . ' ' . $key,
                         $keys,
                         $value
                     )),
@@ -458,12 +458,12 @@ class Builder extends BaseBuilder
 
         // if this is the first iteration of batch then we need to build skeleton sql
         if ($sql === '') {
-            $fieldNames = array_map(static fn ($columnName) => trim($columnName, '"'), $keys);
+            $fieldNames = array_map(static fn ($columnName): string => trim($columnName, '"'), $keys);
 
             $constraints = $this->QBOptions['constraints'] ?? [];
 
             if (empty($constraints)) {
-                $allIndexes = array_filter($this->db->getIndexData($table), static function ($index) use ($fieldNames) {
+                $allIndexes = array_filter($this->db->getIndexData($table), static function ($index) use ($fieldNames): bool {
                     $hasAllFields = count(array_intersect($index->fields, $fieldNames)) === count($index->fields);
 
                     return ($index->type === 'UNIQUE' || $index->type === 'PRIMARY') && $hasAllFields;
@@ -524,7 +524,7 @@ class Builder extends BaseBuilder
             $sql .= implode(
                 ",\n",
                 array_map(
-                    static fn ($key, $value) => $key . ($value instanceof RawSql ?
+                    static fn ($key, $value): string => $key . ($value instanceof RawSql ?
                     " = {$value}" :
                     " = {$alias}.{$value}"),
                     array_keys($updateFields),
@@ -575,7 +575,7 @@ class Builder extends BaseBuilder
             $sql .= 'WHERE ' . implode(
                 ' AND ',
                 array_map(
-                    static function ($key, $value) use ($table, $alias, $that) {
+                    static function ($key, $value) use ($table, $alias, $that): RawSql|string {
                         if ($value instanceof RawSql) {
                             return $value;
                         }
@@ -617,8 +617,8 @@ class Builder extends BaseBuilder
             $data = implode(
                 " UNION ALL\n",
                 array_map(
-                    static fn ($value) => 'SELECT ' . implode(', ', array_map(
-                        static fn ($key, $index) => $index . ' ' . $key,
+                    static fn ($value): string => 'SELECT ' . implode(', ', array_map(
+                        static fn ($key, $index): string => $index . ' ' . $key,
                         $keys,
                         $value
                     )),

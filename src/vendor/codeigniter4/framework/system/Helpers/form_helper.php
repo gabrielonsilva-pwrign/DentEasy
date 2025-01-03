@@ -62,7 +62,7 @@ if (! function_exists('form_open')) {
         // Add CSRF field if enabled, but leave it out for GET requests and requests to external websites
         $before = service('filters')->getFilters()['before'];
 
-        if ((in_array('csrf', $before, true) || array_key_exists('csrf', $before)) && str_contains($action, base_url()) && ! stripos($form, 'method="get"')) {
+        if ((in_array('csrf', $before, true) || array_key_exists('csrf', $before)) && str_contains($action, base_url()) && stripos($form, 'method="get"') === false) {
             $form .= csrf_field($csrfId ?? null);
         }
 
@@ -582,7 +582,7 @@ if (! function_exists('set_select')) {
         }
 
         if ($input === null) {
-            return ($default === true) ? ' selected="selected"' : '';
+            return $default ? ' selected="selected"' : '';
         }
 
         if (is_array($input)) {
@@ -636,7 +636,7 @@ if (! function_exists('set_checkbox')) {
             return ($input === $value) ? ' checked="checked"' : '';
         }
 
-        return ($default === true) ? ' checked="checked"' : '';
+        return $default ? ' checked="checked"' : '';
     }
 }
 
@@ -673,7 +673,7 @@ if (! function_exists('set_radio')) {
             return ((string) $input === $value) ? ' checked="checked"' : '';
         }
 
-        return ($default === true) ? ' checked="checked"' : '';
+        return $default ? ' checked="checked"' : '';
     }
 }
 
@@ -739,10 +739,10 @@ if (! function_exists('validation_show_error')) {
         $config = config(Validation::class);
         $view   = service('renderer');
 
-        $errors = array_filter(validation_errors(), static fn ($key) => preg_match(
+        $errors = array_filter(validation_errors(), static fn ($key): bool => preg_match(
             '/^' . str_replace(['\.\*', '\*\.'], ['\..+', '.+\.'], preg_quote($field, '/')) . '$/',
             $key
-        ), ARRAY_FILTER_USE_KEY);
+        ) === 1, ARRAY_FILTER_USE_KEY);
 
         if ($errors === []) {
             return '';
@@ -788,7 +788,7 @@ if (! function_exists('parse_form_attributes')) {
             if (! is_bool($val)) {
                 if ($key === 'value') {
                     $val = esc($val);
-                } elseif ($key === 'name' && ! strlen($default['name'])) {
+                } elseif ($key === 'name' && $default['name'] === '') {
                     continue;
                 }
                 $att .= $key . '="' . $val . '"' . ($key === array_key_last($default) ? '' : ' ');

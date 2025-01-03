@@ -58,7 +58,7 @@ final class ArrayHelper
         );
 
         return array_map(
-            static fn ($key) => str_replace('\.', '.', $key),
+            static fn ($key): string => str_replace('\.', '.', $key),
             $segments
         );
     }
@@ -96,7 +96,7 @@ final class ArrayHelper
                 $answer[] = self::arraySearchDot($indexes, $value);
             }
 
-            $answer = array_filter($answer, static fn ($value) => $value !== null);
+            $answer = array_filter($answer, static fn ($value): bool => $value !== null);
 
             if ($answer !== []) {
                 // If array only has one element, we return that element for BC.
@@ -307,7 +307,7 @@ final class ArrayHelper
      */
     public static function sortValuesByNatural(array &$array, $sortByIndex = null): bool
     {
-        return usort($array, static function ($currentValue, $nextValue) use ($sortByIndex) {
+        return usort($array, static function ($currentValue, $nextValue) use ($sortByIndex): int {
             if ($sortByIndex !== null) {
                 return strnatcmp((string) $currentValue[$sortByIndex], (string) $nextValue[$sortByIndex]);
             }

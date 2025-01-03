@@ -1021,7 +1021,7 @@ class URI implements Stringable
         // Encode characters
         $path = preg_replace_callback(
             '/(?:[^' . static::CHAR_UNRESERVED . ':@&=\+\$,\/;%]+|%(?![A-Fa-f0-9]{2}))/',
-            static fn (array $matches) => rawurlencode($matches[0]),
+            static fn (array $matches): string => rawurlencode($matches[0]),
             $path
         );
 
@@ -1167,9 +1167,9 @@ class URI implements Stringable
         $return = [];
         $query  = explode('&', $query);
 
-        $params = array_map(static fn (string $chunk) => preg_replace_callback(
+        $params = array_map(static fn (string $chunk): ?string => preg_replace_callback(
             '/^(?<key>[^&=]+?)(?:\[[^&=]*\])?=(?<value>[^&=]+)/',
-            static fn (array $match) => str_replace($match['key'], bin2hex($match['key']), $match[0]),
+            static fn (array $match): string => str_replace($match['key'], bin2hex($match['key']), $match[0]),
             urldecode($chunk)
         ), $query);
 
@@ -1177,7 +1177,8 @@ class URI implements Stringable
         parse_str($params, $result);
 
         foreach ($result as $key => $value) {
-            $return[hex2bin($key)] = $value;
+            // Array key might be int
+            $return[hex2bin((string) $key)] = $value;
         }
 
         return $return;

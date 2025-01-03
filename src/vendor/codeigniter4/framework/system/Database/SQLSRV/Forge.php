@@ -212,10 +212,10 @@ class Forge extends BaseForge
 
             $sql = <<<SQL
                 SELECT name
-                FROM SYS.DEFAULT_CONSTRAINTS
-                WHERE PARENT_OBJECT_ID = OBJECT_ID('{$fullTable}')
-                AND PARENT_COLUMN_ID IN (
-                SELECT column_id FROM sys.columns WHERE NAME IN ({$fields}) AND object_id = OBJECT_ID(N'{$fullTable}')
+                FROM sys.default_constraints
+                WHERE parent_object_id = OBJECT_ID('{$fullTable}')
+                AND parent_column_id IN (
+                SELECT column_id FROM sys.columns WHERE name IN ({$fields}) AND object_id = OBJECT_ID(N'{$fullTable}')
                 )
                 SQL;
 
@@ -225,7 +225,7 @@ class Forge extends BaseForge
 
             $sql = 'ALTER TABLE ' . $fullTable . ' DROP ';
 
-            $fields = array_map(static fn ($item) => 'COLUMN [' . trim($item) . ']', (array) $columnNamesToDrop);
+            $fields = array_map(static fn ($item): string => 'COLUMN [' . trim($item) . ']', (array) $columnNamesToDrop);
 
             return $sql . implode(',', $fields);
         }
@@ -263,7 +263,7 @@ class Forge extends BaseForge
                 $nullable = false;
             }
             $sqls[] = $sql . ' ALTER COLUMN ' . $this->db->escapeIdentifiers($field['name'])
-                . " {$field['type']}{$field['length']} " . ($nullable === true ? '' : 'NOT') . ' NULL';
+                . " {$field['type']}{$field['length']} " . ($nullable ? '' : 'NOT') . ' NULL';
 
             if (! empty($field['comment'])) {
                 $sqls[] = 'EXEC sys.sp_addextendedproperty '
@@ -380,7 +380,7 @@ class Forge extends BaseForge
                 // https://learn.microsoft.com/en-us/sql/t-sql/data-types/char-and-varchar-transact-sql?view=sql-server-ver16#remarks
                 $maxLength = max(
                     array_map(
-                        static fn ($value) => strlen($value),
+                        static fn ($value): int => strlen($value),
                         $attributes['CONSTRAINT']
                     )
                 );
@@ -395,6 +395,11 @@ class Forge extends BaseForge
 
             case 'BOOLEAN':
                 $attributes['TYPE'] = 'BIT';
+                break;
+
+            case 'BLOB':
+                $attributes['TYPE'] = 'VARBINARY';
+                $attributes['CONSTRAINT'] ??= 'MAX';
                 break;
 
             default:
