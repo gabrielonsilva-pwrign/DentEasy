@@ -98,6 +98,7 @@ php denteasy/spark db:seed MainSeeder
 - `Users::edit($id)`: Exibir formulário para editar um usuário.
 - `Users::update($id)`: Processar atualização do usuário.
 - `Users::delete($id)`: Excluir um usuário.
+- `UsersModel::getPermissions($id)`: Localiza as permissões do usuário.
 
 ### Grupos
 
@@ -144,12 +145,12 @@ php denteasy/spark db:seed MainSeeder
 
 ### Inventário
 
-- `Inventário::index()`: Lista todos os itens de inventário.
-- `Inventário::new()`: Exibe formulário para criar um novo item de inventário.
-- `Inventário::create()`: Processa criação de novo item de inventário.
-- `Inventário::edit($id)`: Exibe formulário para editar um item de inventário.
-- `Inventário::update($id)`: Processa atualização do item de inventário.
-- `Inventário::delete($id)`: Exclui um item de inventário.
+- `Inventory::index()`: Lista todos os itens de inventário.
+- `Inventory::new()`: Exibe formulário para criar um novo item de inventário.
+- `Inventory::create()`: Processa criação de novo item de inventário.
+- `Inventory::edit($id)`: Exibe formulário para editar um item de inventário.
+- `Inventory::update($id)`: Processa atualização do item de inventário.
+- `Inventory::delete($id)`: Exclui um item de inventário.
 - `Inventory::history($id)`: Visualizar histórico de um item de inventário.
 - `InventoryModel::search()`: Pesquisar itens de inventário.
 - `InventoryModel::getLowStockItems()`: Obter itens com estoque baixo.
@@ -180,10 +181,6 @@ php denteasy/spark db:seed MainSeeder
 - **Uploads de arquivo**: O módulo de tratamentos permite uploads e gerenciamento de arquivos.
 - **Controle de acesso baseado em função**: as permissões do usuário são gerenciadas por meio de atribuições de grupo.
 - **Cache**: o Dashboard implementa o cache para melhorar o desempenho.
-
-## Configuração e instalação
-
-[Incluir instruções para configurar e instalar o aplicativo]
 
 ## Dependências
 
