@@ -62,6 +62,16 @@
                         <a class="nav-link" href="/inventory">Estoque</a>
                     </li>
                     <?php endif; ?>
+
+                    <?php
+                                $userModel = new \App\Models\UserModel();
+                                $permissions = $userModel->getPermissions(session()->get('user_id'));
+                                if (
+                                    (isset($permissions['users']) && in_array('view', $permissions['users'])) || 
+                                    (isset($permissions['groups']) && in_array('view', $permissions['groups'])) || 
+                                    (isset($permissions['api']) && in_array('view', $permissions['api']))
+                                    ):
+                    ?>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Administração</a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -88,6 +98,7 @@
                             <?php endif; ?>
                         </div>
                     </li>
+                    <?php endif; ?>
                 </ul>
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
