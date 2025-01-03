@@ -16,27 +16,27 @@ COPY . /var/www/html
 
 COPY /docker/denteasy.conf /etc/apache2/sites-enabled/000-default.conf
 
-RUN docker-php-ext-install intl opcache pdo_mysql mysqli pdo mbstring zip gd
+RUN docker-php-ext-install intl opcache pdo_mysql mysqli pdo mbstring zip gd a2enmod rewrite
 
 RUN docker-php-ext-configure intl && docker-php-ext-configure gd
 
-RUN docker-php-ext-enable mysqli && docker-php-ext-enable gd && docker-php-ext-enable intl && docker-php-ext-enable opcache
+RUN docker-php-ext-enable mysqli && docker-php-ext-enable gd && \
+    docker-php-ext-enable intl && docker-php-ext-enable opcache
 
-RUN echo "upload_max_filesize = 100M" > /usr/local/etc/php/conf.d/uploads.ini
-
-RUN echo "post_max_size = 100M" >> /usr/local/etc/php/conf.d/uploads.ini
-
-RUN chown -R www-data:www-data /var/www/html && a2enmod rewrite && a2enmod headers proxy_http
-
-RUN chmod -R 755 /var/www/html
+RUN echo "upload_max_filesize = 100M" > /usr/local/etc/php/conf.d/uploads.ini && \
+    echo "post_max_size = 100M" >> /usr/local/etc/php/conf.d/uploads.ini
 
 RUN mkdir -p /var/www/.composer
 
-RUN chown -R www-data:www-data /var/www/.composer
+RUN chown -R www-data:www-data /var/www/html && \ 
+    a2enmod rewrite && a2enmod headers proxy_http && \
+    chown -R www-data:www-data /var/www/.composer
 
-RUN chmod -R 755 /var/www/.composer
+RUN chmod -R 755 /var/www/html && \
+    chmod -R 755 /var/www/.composer && \
+    chmod +x /var/www/html spark
 
-RUN composer self-update --stable && composer update
+RUN composer install && composer self-update --stable && composer update
 
 RUN service apache2 restart
 
