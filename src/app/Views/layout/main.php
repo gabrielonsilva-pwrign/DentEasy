@@ -15,11 +15,13 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <?php if(session()->get('user_id')) { ?>
+                <?php                                 
+                    $userModel = new \App\Models\UserModel();
+                    $permissions = $userModel->getPermissions(session()->get('user_id'));
+                ?>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                 <?php
-                                $userModel = new \App\Models\UserModel();
-                                $permissions = $userModel->getPermissions(session()->get('user_id'));
                                 if (isset($permissions['dashboard']) && in_array('view', $permissions['dashboard'])):
                             ?>
                     <li class="nav-item">
@@ -27,8 +29,6 @@
                     </li>
                     <?php endif; ?>
                     <?php
-                                $userModel = new \App\Models\UserModel();
-                                $permissions = $userModel->getPermissions(session()->get('user_id'));
                                 if (isset($permissions['patients']) && in_array('view', $permissions['patients'])):
                             ?>
                     <li class="nav-item">
@@ -36,8 +36,6 @@
                     </li>
                     <?php endif; ?>
                     <?php
-                                $userModel = new \App\Models\UserModel();
-                                $permissions = $userModel->getPermissions(session()->get('user_id'));
                                 if (isset($permissions['appointments']) && in_array('view', $permissions['appointments'])):
                             ?>
                     <li class="nav-item">
@@ -45,8 +43,6 @@
                     </li>
                     <?php endif; ?>
                     <?php
-                                $userModel = new \App\Models\UserModel();
-                                $permissions = $userModel->getPermissions(session()->get('user_id'));
                                 if (isset($permissions['treatments']) && in_array('view', $permissions['treatments'])):
                             ?>
                     <li class="nav-item">
@@ -54,8 +50,6 @@
                     </li>
                     <?php endif; ?>
                     <?php
-                                $userModel = new \App\Models\UserModel();
-                                $permissions = $userModel->getPermissions(session()->get('user_id'));
                                 if (isset($permissions['inventory']) && in_array('view', $permissions['inventory'])):
                             ?>
                     <li class="nav-item">
@@ -64,8 +58,6 @@
                     <?php endif; ?>
 
                     <?php
-                                $userModel = new \App\Models\UserModel();
-                                $permissions = $userModel->getPermissions(session()->get('user_id'));
                                 if (
                                     (isset($permissions['users']) && in_array('view', $permissions['users'])) || 
                                     (isset($permissions['groups']) && in_array('view', $permissions['groups'])) || 
@@ -76,22 +68,16 @@
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Administração</a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <?php
-                                $userModel = new \App\Models\UserModel();
-                                $permissions = $userModel->getPermissions(session()->get('user_id'));
                                 if (isset($permissions['users']) && in_array('view', $permissions['users'])):
                             ?>
                             <a class="dropdown-item" href="/users">Usuários</a>
                             <?php endif; ?>
                             <?php
-                                $userModel = new \App\Models\UserModel();
-                                $permissions = $userModel->getPermissions(session()->get('user_id'));
                                 if (isset($permissions['groups']) && in_array('view', $permissions['groups'])):
                             ?>
                             <a class="dropdown-item" href="/groups">Grupos</a>
                             <?php endif; ?>
                             <?php
-                                $userModel = new \App\Models\UserModel();
-                                $permissions = $userModel->getPermissions(session()->get('user_id'));
                                 if (isset($permissions['api']) && in_array('view', $permissions['api'])):
                             ?>
                             <a class="dropdown-item" href="/api">API</a>

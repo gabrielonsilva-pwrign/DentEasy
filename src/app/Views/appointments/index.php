@@ -1,9 +1,17 @@
 <?= $this->extend('layout/main') ?>
 
 <?= $this->section('content') ?>
+<?php                                 
+                    $userModel = new \App\Models\UserModel();
+                    $permissions = $userModel->getPermissions(session()->get('user_id'));
+                ?>
 <h1>Agendamentos</h1>
 <div class="mb-3">
+<?php
+                if (isset($permissions['appointments']) && in_array('add', $permissions['appointments'])):
+            ?>
     <a href="/appointments/new" class="btn btn-primary">Adicionar Novo Agendamento</a>
+    <?php endif; ?>
     <div class="btn-group" role="group">
         <a href="/appointments?view=calendar" class="btn btn-outline-secondary <?= $viewMode === 'calendar' ? 'active' : '' ?>">Calendário</a>
         <a href="/appointments?view=list" class="btn btn-outline-secondary <?= $viewMode === 'list' ? 'active' : '' ?>">Lista</a>
@@ -31,8 +39,16 @@
                 <td><?= $appointment['title'] ?></td>
                 <td><?= ucfirst($appointment['status']) ?></td>
                 <td>
+                <?php
+                if (isset($permissions['appointments']) && in_array('edit', $permissions['appointments'])):
+            ?>
                     <a href="/appointments/edit/<?= $appointment['id'] ?>" class="btn btn-sm btn-warning">Editar</a>
+                    <?php endif; ?>
+                    <?php
+                if (isset($permissions['appointments']) && in_array('delete', $permissions['appointments'])):
+            ?>
                     <a href="/appointments/delete/<?= $appointment['id'] ?>" class="btn btn-sm btn-danger" onclick="return confirm('Você tem certeza?')">Excluir</a>
+                <?php endif; ?>
                 </td>
             </tr>
             <?php endforeach; ?>

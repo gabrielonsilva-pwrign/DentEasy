@@ -39,7 +39,7 @@ class Appointments extends BaseController
     }
 
     public function new()
-    {
+    {   
         $this->checkPermission('appointments','add');
         $data['patients'] = $this->patientModel->findAll();
         return view('appointments/create', $data);
