@@ -26,6 +26,8 @@ RUN docker-php-ext-enable mysqli && docker-php-ext-enable gd && \
 RUN echo "upload_max_filesize = 100M" > /usr/local/etc/php/conf.d/uploads.ini && \
     echo "post_max_size = 100M" >> /usr/local/etc/php/conf.d/uploads.ini
 
+RUN echo "disable_functions = exec,passthru,shell_exec,system,proc_open,popen,curl_exec,curl_multi_exec,parse_ini_file,show_source" > /usr/local/etc/php/conf.d/disable_functions.ini
+
 RUN mkdir -p /var/www/.composer && \
     mkdir -p /var/www/html/denteasy/writable/logs && \
     mkdir -p /var/www/html/denteasy/writable/cache && \
