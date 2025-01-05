@@ -12,7 +12,7 @@ class UserModel extends Model
     protected $useTimestamps = true;
     protected $validationRules = [
         'name' => 'required|min_length[3]|max_length[255]',
-        'email' => 'required|valid_email|is_unique[users.email,id,{id}]',
+        'email' => 'required|valid_email|is_unique[users.email,users.id,{id}]',
         'password' => 'required|min_length[6]',
         'group_id' => 'required|numeric',
         'id' => 'max_length[19]'

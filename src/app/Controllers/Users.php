@@ -55,6 +55,7 @@ class Users extends BaseController
     {
         $this->checkPermission('users','edit');
         $data = $this->request->getPost();
+        $data['id'] = $id;
         if (!empty($data['password'])) {
             $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
         } else {

@@ -12,7 +12,11 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 
 RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf
 
-COPY src/. /var/www/html/denteasy
+RUN git clone https://github.com/gabrielonsilva-pwrign/DentEasy.git /files
+
+COPY files/src/. /var/www/html/denteasy
+
+# COPY src/. /var/www/html/denteasy
 
 COPY docker/denteasy.conf /etc/apache2/sites-enabled/000-default.conf
 
