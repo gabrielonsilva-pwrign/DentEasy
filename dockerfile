@@ -12,6 +12,8 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 
 RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf
 
+RUN mkdir -p /files
+
 RUN git clone https://github.com/gabrielonsilva-pwrign/DentEasy.git /files
 
 COPY files/src/. /var/www/html/denteasy
