@@ -30,6 +30,7 @@ class Treatments extends BaseController
 
     public function index()
     {
+        $this->checkPermission('treatments','view');
         $data['treatments'] = $this->treatmentModel->getTreatmentsWithPatientInfo();
         $data['pager'] = $this->treatmentModel->pager;
         return view('treatments/index', $data);
@@ -37,6 +38,7 @@ class Treatments extends BaseController
 
     public function new()
     {
+        $this->checkPermission('treatments','add');
         $data['appointments'] = $this->appointmentModel->getUpcomingAppointments();
         $data['inventory_items'] = $this->inventoryModel->findAll();
         return view('treatments/create', $data);
@@ -44,6 +46,7 @@ class Treatments extends BaseController
 
     public function create()
     {
+        $this->checkPermission('treatments','add');
         $data = $this->request->getPost();
         
         $this->databaseConnection->transStart();
@@ -98,6 +101,7 @@ class Treatments extends BaseController
 
     public function edit($id = null)
     {
+        $this->checkPermission('treatments','edit');
         $data['treatment'] = $this->treatmentModel->find($id);
         $data['appointments'] = $this->appointmentModel->getAppointmentsWithPatientInfo();
         $data['inventory_items'] = $this->inventoryModel->findAll();
@@ -108,6 +112,7 @@ class Treatments extends BaseController
 
     public function update($id = null)
     {
+        $this->checkPermission('treatments','edit');
         $data = $this->request->getPost();
         
         $this->databaseConnection->transStart();
@@ -161,6 +166,7 @@ class Treatments extends BaseController
 
     public function delete($id = null)
     {
+        $this->checkPermission('treatments','delete');
         if ($this->treatmentModel->delete($id)) {
             return redirect()->to('/treatments')->with('success', 'Tratamento excluído');
         } else {
@@ -170,6 +176,7 @@ class Treatments extends BaseController
 
     public function view($id = null)
     {
+        $this->checkPermission('treatments','view');
         $data['treatment'] = $this->treatmentModel->getTreatmentWithPatientInfo($id);
         $data['treatment_items'] = $this->treatmentItemModel->getTreatmentItems($id);
         $data['treatment_files'] = $this->treatmentFileModel->where('treatment_id', $id)->findAll();
@@ -178,6 +185,7 @@ class Treatments extends BaseController
 
     public function deleteFile($id = null)
     {
+        $this->checkPermission('treatments','delete');
         $file = $this->treatmentFileModel->find($id);
         if ($file) {
             $filePath = ROOTPATH . 'public/uploads/treatments/' . $file['file_name'];

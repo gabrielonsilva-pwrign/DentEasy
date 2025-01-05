@@ -1,8 +1,16 @@
 <?= $this->extend('layout/main') ?>
 
 <?= $this->section('content') ?>
+<?php                                 
+                    $userModel = new \App\Models\UserModel();
+                    $permissions = $userModel->getPermissions(session()->get('user_id'));
+                ?>
 <h1>Estoque</h1>
+<?php
+                if (isset($permissions['inventory']) && in_array('add', $permissions['inventory'])):
+            ?>
 <a href="/inventory/new" class="btn btn-primary mb-3">Adicionar Novo Item</a>
+<?php endif; ?>
 
 <form action="/inventory" method="get" class="mb-3">
     <div class="input-group">
@@ -38,9 +46,21 @@
             <td><?= $item['quantity'] ?> <?= $item['unit'] ?></td>
             <td>R$ <?= number_format($item['purchase_price'], 2,",",".") ?></td>
             <td>
+            <?php
+                if (isset($permissions['inventory']) && in_array('edit', $permissions['inventory'])):
+            ?>
                 <a href="/inventory/edit/<?= $item['id'] ?>" class="btn btn-sm btn-warning">Editar</a>
+                <?php endif; ?>
+                <?php
+                if (isset($permissions['inventory']) && in_array('delete', $permissions['inventory'])):
+            ?>
                 <a href="/inventory/delete/<?= $item['id'] ?>" class="btn btn-sm btn-danger" onclick="return confirm('Você tem certeza?')">Excluir</a>
+                <?php endif; ?>
+                <?php
+                if (isset($permissions['inventory']) && in_array('view', $permissions['inventory'])):
+            ?>
                 <a href="/inventory/history/<?= $item['id'] ?>" class="btn btn-sm btn-info">Histórico</a>
+                    <?php endif; ?>
             </td>
         </tr>
         <?php endforeach; ?>

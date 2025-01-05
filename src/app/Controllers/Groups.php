@@ -15,17 +15,20 @@ class Groups extends BaseController
 
     public function index()
     {
+        $this->checkPermission('groups','view');
         $data['groups'] = $this->groupModel->findAll();
         return view('groups/index', $data);
     }
 
     public function new()
     {
+        $this->checkPermission('groups','add');
         return view('groups/create');
     }
 
     public function create()
     {
+        $this->checkPermission('groups','add');
         $data = $this->request->getPost();
         $data['permissions'] = json_encode($this->request->getPost('permissions'));
 
@@ -38,6 +41,7 @@ class Groups extends BaseController
 
     public function edit($id = null)
     {
+        $this->checkPermission('groups','edit');
         $data['group'] = $this->groupModel->find($id);
         $data['group']['permissions'] = json_decode($data['group']['permissions'], true);
         return view('groups/edit', $data);
@@ -45,6 +49,7 @@ class Groups extends BaseController
 
     public function update($id = null)
     {
+        $this->checkPermission('groups','edit');
         $data = $this->request->getPost();
         $data['permissions'] = json_encode($this->request->getPost('permissions'));
         $data['id'] = $id;
@@ -58,6 +63,7 @@ class Groups extends BaseController
 
     public function delete($id = null)
     {
+        $this->checkPermission('groups','delete');
         if ($this->groupModel->delete($id)) {
             return redirect()->to('/groups')->with('success', 'Grupo excluído');
         } else {

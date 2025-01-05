@@ -18,18 +18,21 @@ class Users extends BaseController
 
     public function index()
     {
+        $this->checkPermission('users','view');
         $data['users'] = $this->userModel->findAll();
         return view('users/index', $data);
     }
 
     public function new()
     {
+        $this->checkPermission('users','add');
         $data['groups'] = $this->groupModel->findAll();
         return view('users/create', $data);
     }
 
     public function create()
     {
+        $this->checkPermission('users','add');
         $data = $this->request->getPost();
         $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
 
@@ -42,6 +45,7 @@ class Users extends BaseController
 
     public function edit($id = null)
     {
+        $this->checkPermission('users','edit');
         $data['user'] = $this->userModel->find($id);
         $data['groups'] = $this->groupModel->findAll();
         return view('users/edit', $data);
@@ -49,6 +53,7 @@ class Users extends BaseController
 
     public function update($id = null)
     {
+        $this->checkPermission('users','edit');
         $data = $this->request->getPost();
         if (!empty($data['password'])) {
             $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
@@ -65,6 +70,7 @@ class Users extends BaseController
 
     public function delete($id = null)
     {
+        $this->checkPermission('users','delete');
         if ($this->userModel->delete($id)) {
             return redirect()->to('/users')->with('success', 'Usuário excluído');
         } else {

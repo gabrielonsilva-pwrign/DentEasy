@@ -15,31 +15,76 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <?php if(session()->get('user_id')) { ?>
+                <?php                                 
+                    $userModel = new \App\Models\UserModel();
+                    $permissions = $userModel->getPermissions(session()->get('user_id'));
+                ?>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
+                <?php
+                                if (isset($permissions['dashboard']) && in_array('view', $permissions['dashboard'])):
+                            ?>
                     <li class="nav-item">
                         <a class="nav-link" href="/dashboard">Dashboard</a>
                     </li>
+                    <?php endif; ?>
+                    <?php
+                                if (isset($permissions['patients']) && in_array('view', $permissions['patients'])):
+                            ?>
                     <li class="nav-item">
                         <a class="nav-link" href="/patients">Pacientes</a>
                     </li>
+                    <?php endif; ?>
+                    <?php
+                                if (isset($permissions['appointments']) && in_array('view', $permissions['appointments'])):
+                            ?>
                     <li class="nav-item">
                         <a class="nav-link" href="/appointments">Agendamentos</a>
                     </li>
+                    <?php endif; ?>
+                    <?php
+                                if (isset($permissions['treatments']) && in_array('view', $permissions['treatments'])):
+                            ?>
                     <li class="nav-item">
                         <a class="nav-link" href="/treatments">Tratamentos</a>
                     </li>
+                    <?php endif; ?>
+                    <?php
+                                if (isset($permissions['inventory']) && in_array('view', $permissions['inventory'])):
+                            ?>
                     <li class="nav-item">
                         <a class="nav-link" href="/inventory">Estoque</a>
                     </li>
+                    <?php endif; ?>
+
+                    <?php
+                                if (
+                                    (isset($permissions['users']) && in_array('view', $permissions['users'])) || 
+                                    (isset($permissions['groups']) && in_array('view', $permissions['groups'])) || 
+                                    (isset($permissions['api']) && in_array('view', $permissions['api']))
+                                    ):
+                    ?>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Administração</a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <?php
+                                if (isset($permissions['users']) && in_array('view', $permissions['users'])):
+                            ?>
                             <a class="dropdown-item" href="/users">Usuários</a>
+                            <?php endif; ?>
+                            <?php
+                                if (isset($permissions['groups']) && in_array('view', $permissions['groups'])):
+                            ?>
                             <a class="dropdown-item" href="/groups">Grupos</a>
+                            <?php endif; ?>
+                            <?php
+                                if (isset($permissions['api']) && in_array('view', $permissions['api'])):
+                            ?>
                             <a class="dropdown-item" href="/api">API</a>
+                            <?php endif; ?>
                         </div>
                     </li>
+                    <?php endif; ?>
                 </ul>
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">

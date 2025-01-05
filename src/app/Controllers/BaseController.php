@@ -55,4 +55,15 @@ abstract class BaseController extends Controller
 
         // E.g.: $this->session = \Config\Services::session();
     }
+
+    protected function checkPermission($module, $action)
+    {
+        $userId = session()->get('user_id');
+        $userModel = new \App\Models\UserModel();
+        $permissions = $userModel->getPermissions($userId);
+
+        if (!isset($permissions[$module]) || !in_array($action, $permissions[$module])) {
+            return redirect()->to('/')->with('error', 'Você não tem essa permissão.');
+        }
+    }
 }

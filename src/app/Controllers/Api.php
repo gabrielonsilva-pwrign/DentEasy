@@ -18,17 +18,20 @@ class Api extends BaseController
 
     public function index()
     {
+        $this->checkPermission('api','view');
         $data['webhooks'] = $this->webhookModel->findAll();
         return view('api/index', $data);
     }
 
     public function new()
     {
+        $this->checkPermission('api','add');
         return view('api/create');
     }
 
     public function create()
     {
+        $this->checkPermission('api','add');
         $data = $this->request->getPost();
 
         if ($this->webhookModel->insert($data)) {
@@ -40,12 +43,14 @@ class Api extends BaseController
 
     public function edit($id = null)
     {
+        $this->checkPermission('api','edit');
         $data['webhook'] = $this->webhookModel->find($id);
         return view('api/edit', $data);
     }
 
     public function update($id = null)
     {
+        $this->checkPermission('api','edit');
         $data = $this->request->getPost();
 
         if ($this->webhookModel->update($id, $data)) {
@@ -57,6 +62,7 @@ class Api extends BaseController
 
     public function delete($id = null)
     {
+        $this->checkPermission('api','delete');
         if ($this->webhookModel->delete($id)) {
             return redirect()->to('/api')->with('success', 'Webhook excluído');
         } else {
