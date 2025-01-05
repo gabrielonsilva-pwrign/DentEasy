@@ -12,9 +12,7 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 
 RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf
 
-RUN cd /tmp && git clone https://github.com/gabrielonsilva-pwrign/DentEasy.git
-
-# COPY src/. /var/www/html/denteasy
+COPY src/. /var/www/html/denteasy
 
 COPY docker/denteasy.conf /etc/apache2/sites-enabled/000-default.conf
 
@@ -27,8 +25,6 @@ RUN docker-php-ext-enable mysqli && docker-php-ext-enable gd && \
 
 RUN echo "upload_max_filesize = 100M" > /usr/local/etc/php/conf.d/uploads.ini && \
     echo "post_max_size = 100M" >> /usr/local/etc/php/conf.d/uploads.ini
-
-RUN mv /tmp/DentEasy/src/. /var/www/html/denteasy
 
 RUN echo "disable_functions = exec,passthru,shell_exec,system,proc_open,popen,curl_exec,curl_multi_exec,parse_ini_file,show_source" > /usr/local/etc/php/conf.d/disable_functions.ini
 
