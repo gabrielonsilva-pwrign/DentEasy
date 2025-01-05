@@ -2,16 +2,16 @@ services:
   dentEasy:
     image: ghcr.io/gabrielonsilva-pwrign/denteasy:main
     volumes:
-      - denteasy_files:/var/www/html
+      - denteasy_files:/var/www/html/public/uploads
     restart: "unless-stopped"
     links:
       - denteasydb
     networks:
       - ${NETWORK}
     environment:
-      admin_name: "${Admin_Name}"
-      admin_email: "${Admin_Email}"
-      admin_password: "${Admin_Passowrd}"
+      admin_name: ${Admin_Name}
+      admin_email: ${Admin_Email}
+      admin_password: ${Admin_Passowrd}
       database_default_hostname: denteasydb
       database_default_database: dental_clinic
       database_default_username: root
