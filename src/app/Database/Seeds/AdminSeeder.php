@@ -20,8 +20,7 @@ class AdminSeeder extends Seeder
                 'treatments' => ['view', 'add', 'edit', 'delete'],
                 'inventory' => ['view', 'add', 'edit', 'delete'],
                 'api' => ['view', 'add', 'edit', 'delete'],
-                'dashboard' => ['view', 'add', 'edit', 'delete'],
-                'patients' => ['view', 'add', 'edit', 'delete']
+                'dashboard' => ['view', 'add', 'edit', 'delete']
             ])
         ]);
 

@@ -63,7 +63,7 @@ abstract class BaseController extends Controller
         $permissions = $userModel->getPermissions($userId);
 
         if (!isset($permissions[$module]) || !in_array($action, $permissions[$module])) {
-            return redirect()->to('/')->with('error', 'Você não tem essa permissão.');
+            return redirect()->back()->with('error', 'Você não tem essa permissão.');
         }
     }
 }
