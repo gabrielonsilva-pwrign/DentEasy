@@ -18,8 +18,8 @@
         <button class="btn btn-outline-secondary" type="submit">Pesquisar</button>
     </div>
 </form>
-
-<table class="table">
+<div class="table-responsive">
+<table class="table table-hover">
     <thead>
         <tr>
             <th><a href="?order_by=id&order_dir=<?= ($_GET['order_by'] ?? '') == 'id' && ($_GET['order_dir'] ?? '') == 'asc' ? 'desc' : 'asc' ?>">ID</a></th>
@@ -66,6 +66,6 @@
         <?php endforeach; ?>
     </tbody>
 </table>
-
+                </div>
 <?= $pager->links() ?>
 <?= $this->endSection() ?>

@@ -11,7 +11,7 @@
             ?>
 <a href="/treatments/new" class="btn btn-primary mb-3">Adicionar Novo Tratamento</a>
 <?php endif; ?>
-
+<div class="table-responsive">
 <table class="table">
     <thead>
         <tr>
@@ -52,6 +52,6 @@
         <?php endforeach; ?>
     </tbody>
 </table>
-
+                </div>
 <?= $pager->links() ?>
 <?= $this->endSection() ?>
