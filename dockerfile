@@ -14,6 +14,10 @@ RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf
 
 COPY src/. /var/www/html/denteasy
 
+COPY docker/entrypoint.sh /usr/local/bin/
+
+ADD https://raw.githubusercontent.com/vishnubob/wait-for-it/master/wait-for-it.sh /usr/local/bin/wait-for-it.sh
+
 COPY docker/denteasy.conf /etc/apache2/sites-enabled/000-default.conf
 
 RUN docker-php-ext-install intl opcache pdo_mysql mysqli pdo mbstring zip gd
@@ -32,14 +36,16 @@ RUN mkdir -p /var/www/.composer && \
     mkdir -p /var/www/html/denteasy/writable/logs && \
     mkdir -p /var/www/html/denteasy/writable/cache && \
     mkdir -p /var/www/html/denteasy/writable/session && \
-    mkdir -p /var/www/html/denteasy/writable/debugbar
+    mkdir -p /var/www/html/denteasy/writable/debugbar && \
+    mkdir -p /var/www/html/public/uploads
 
 RUN chown -R www-data:www-data /var/www/html && \ 
     a2enmod rewrite && a2enmod headers proxy_http && \
     chown -R www-data:www-data /var/www/.composer
 
 RUN chmod -R 755 /var/www/html && \
-    chmod -R 755 /var/www/.composer
+    chmod -R 755 /var/www/.composer && \
+    chmod +x /usr/local/bin/entrypoint.sh
 
 RUN service apache2 restart
 

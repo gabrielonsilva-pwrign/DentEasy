@@ -21,6 +21,7 @@
 <?php if ($viewMode === 'calendar'): ?>
     <div id="calendar"></div>
 <?php else: ?>
+    <div class="table-responsive">
     <table class="table">
         <thead>
             <tr>
@@ -54,6 +55,7 @@
             <?php endforeach; ?>
         </tbody>
     </table>
+                </div>
 <?php endif; ?>
 <?= $this->endSection() ?>
 

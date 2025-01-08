@@ -11,6 +11,7 @@
             ?>
 <a href="/users/new" class="btn btn-primary mb-3">Adicionar Novo Usuário</a>
 <?php endif; ?>
+<div class="table-responsive">
 <table class="table">
     <thead>
         <tr>
@@ -44,4 +45,5 @@
         <?php endforeach; ?>
     </tbody>
 </table>
+                </div>
 <?= $this->endSection() ?>

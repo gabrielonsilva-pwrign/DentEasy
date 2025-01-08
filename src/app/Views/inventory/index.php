@@ -27,7 +27,7 @@
     <?php endforeach; ?>
 </div>
 <?php endif; ?>
-
+<div class="table-responsive">
 <table class="table">
     <thead>
         <tr>
@@ -66,6 +66,6 @@
         <?php endforeach; ?>
     </tbody>
 </table>
-
+                </div>
 <?= $pager->links() ?>
 <?= $this->endSection() ?>
