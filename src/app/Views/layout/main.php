@@ -7,7 +7,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.2/main.min.css" rel="stylesheet">
 </head>
-<body>
+<body class="d-flex flex-column">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container">
             <a class="navbar-brand" href="/dashboard">DentEasy</a>
@@ -96,17 +96,22 @@
         </div>
     </nav>
 
-    <div class="container mt-4">
+    <div class="container mt-4 text-wrap min-vh-100">
         <?php if(session()->getFlashdata('success')): ?>
             <div class="alert alert-success"><?= session()->getFlashdata('success') ?></div>
         <?php endif; ?>
         <?php if(session()->getFlashdata('error')): ?>
             <div class="alert alert-danger"><?= session()->getFlashdata('error') ?></div>
         <?php endif; ?>
-        <?= $this->renderSection('content') ?>
-    </div>
 
-    
+        <?= $this->renderSection('content') ?>
+
+
+    </div>
+            <footer class="mt-4 bg-light text-dark">
+            <p class="text-center fs-6">DentEasy &copy; <?php echo date('Y')?> - <a href="https://github.com/gabrielonsilva-pwrign/DentEasy" target="_blank">v.1.1.2</a> 
+            | Desenvolvido por <a href="https://poweriguana.com.br" target="_blank">Power Iguana</a></p>
+        </footer>
     <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.2/main.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/inputmask/5.0.6/jquery.inputmask.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
