@@ -14,6 +14,7 @@
 </div>
 
 <h2 class="mt-4">Itens Usados</h2>
+<div class="table-responsive">
 <table class="table">
     <thead>
         <tr>
@@ -30,7 +31,7 @@
         <?php endforeach; ?>
     </tbody>
 </table>
-
+        </div>
 <h2 class="mt-4">Arquivos</h2>
 <ul>
     <?php foreach ($treatment_files as $file): ?>

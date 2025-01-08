@@ -2,7 +2,7 @@
 
 <?= $this->section('content') ?>
 <h1>Histórico de Estoque: <?= $item['name'] ?></h1>
-
+<div class="table-responsive">
 <table class="table">
     <thead>
         <tr>
@@ -23,6 +23,6 @@
         <?php endforeach; ?>
     </tbody>
 </table>
-
+        </div>
 <a href="/inventory" class="btn btn-secondary">Voltar para Estoque</a>
 <?= $this->endSection() ?>
