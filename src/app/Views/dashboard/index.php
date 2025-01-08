@@ -13,10 +13,8 @@
             <label for="end_date" class="form-label">Data de Fim</label>
             <input type="date" class="form-control" id="end_date" name="end_date" value="<?= $endDate ?>">
         </div>
-        <div class="col-md-3 d-flex align-items-end">
+        <div class="col-md-3 d-flex align-items-end justify-content-start gap-2">
             <button type="submit" class="btn btn-primary">Aplicar Filtro</button>
-        </div>
-        <div class="col-md-3 d-flex align-items-end justify-content-end">
             <a href="/dashboard/clearCache" class="btn btn-secondary">Limpar</a>
         </div>
     </div>
