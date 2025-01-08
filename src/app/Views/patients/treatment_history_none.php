@@ -2,7 +2,7 @@
 
 <?= $this->section('content') ?>
 <h1>Histórico de Tratamento: <?= $patient['name'] ?></h1>
-
+<div class="table-responsive">
 <table class="table">
     <thead>
         <tr>
@@ -19,6 +19,6 @@
         </tr>
     </tbody>
 </table>
-
+</div>
 <a href="/patients" class="btn btn-secondary">Voltar</a>
 <?= $this->endSection() ?>
