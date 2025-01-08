@@ -19,16 +19,6 @@ O compose foi criado para trabalhar com SWARM. Adapte conforme necessário caso 
 ### Variáveis ENV Database
 - **MYSQL_ROOT_PASSWORD**: ${DB_Password} # Senha do Banco de Dados (Mesma de Env Aplicação)
 
-### Próximos Passos
-- Após subir a Stack, executar os seguintes comandos no console: 
-
-```
-php denteasy/spark migrate
-php denteasy/spark db:seed MainSeeder
-```
-
-**Atenção** Esse passo será removido em futuras versões, para facilitar o deploy
-
 ## Módulos
 
 ### 1. Autenticação

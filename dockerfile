@@ -14,6 +14,10 @@ RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf
 
 COPY src/. /var/www/html/denteasy
 
+COPY docker/entrypoint.sh /usr/local/bin/
+
+ADD https://raw.githubusercontent.com/vishnubob/wait-for-it/master/wait-for-it.sh /usr/local/bin/wait-for-it.sh
+
 COPY docker/denteasy.conf /etc/apache2/sites-enabled/000-default.conf
 
 RUN docker-php-ext-install intl opcache pdo_mysql mysqli pdo mbstring zip gd
