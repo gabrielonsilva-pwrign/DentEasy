@@ -4,8 +4,9 @@ services:
     volumes:
       - denteasy_files:/var/www/html/public/uploads
     restart: "unless-stopped"
-    command: /usr/local/bin/entrypoint.sh
     links:
+      - denteasydb
+    depends_on:
       - denteasydb
     networks:
       - ${NETWORK}
