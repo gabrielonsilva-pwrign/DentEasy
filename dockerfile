@@ -45,6 +45,8 @@ RUN chmod -R 755 /var/www/html && \
     chmod -R 755 /var/www/.composer && \
     chmod +x /usr/local/bin/entrypoint.sh
 
+RUN service apache2 restart
+
 WORKDIR /var/www/html
 
 USER www-data
@@ -52,6 +54,5 @@ USER www-data
 EXPOSE 80
 EXPOSE 443
 
-CMD ["/usr/local/bin/entrypoint.sh"]
+CMD ["/usr/local/bin/entrypoint.sh"] && ["apache2-foreground"]
 
-RUN service apache2 restart
