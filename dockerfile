@@ -54,5 +54,5 @@ USER www-data
 EXPOSE 80
 EXPOSE 443
 
-CMD ["/bin/bash","-c","/usr/local/bin/entrypoint.sh"] && ["apache2-foreground"]
+#CMD ["/bin/bash","-c","/usr/local/bin/entrypoint.sh"] && ["apache2-foreground"]
 
