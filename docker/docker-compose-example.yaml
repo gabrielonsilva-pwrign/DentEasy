@@ -1,11 +1,11 @@
+version: '3.8'
+
 services:
   dentEasy:
     image: ghcr.io/gabrielonsilva-pwrign/denteasy:main
     volumes:
       - denteasy_files:/var/www/html/public/uploads
     restart: "unless-stopped"
-    links:
-      - denteasydb
     depends_on:
       - denteasydb
     networks:
@@ -13,7 +13,7 @@ services:
     environment:
       admin_name: ${Admin_Name}
       admin_email: ${Admin_Email}
-      admin_password: ${Admin_Passowrd}
+      admin_password: ${Admin_Password}
       database_default_hostname: denteasydb
       database_default_database: dental_clinic
       database_default_username: root
@@ -50,6 +50,11 @@ services:
       - ${NETWORK}
     volumes:
       - denteasy_database:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
 volumes:
   denteasy_files:
