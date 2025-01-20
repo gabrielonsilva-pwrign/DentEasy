@@ -45,6 +45,11 @@ class Patients extends BaseController
         $this->checkPermission('patients','add');
         $data = $this->request->getPost();
 
+        if (isset($data['odontogram_data'])) {
+            $data['odontogram_data'] = json_decode($data['odontogram_data'], true);
+            $data['odontogram_data'] = json_encode($data['odontogram_data']);
+        }
+
         if ($this->patientModel->insert($data)) {
             return redirect()->to('/patients')->with('success', 'Paciente adicionado');
         } else {
@@ -64,6 +69,11 @@ class Patients extends BaseController
         $this->checkPermission('patients','edit');
         $data = $this->request->getPost();
         $data['id'] = $id;
+
+        if (isset($data['odontogram_data'])) {
+            $data['odontogram_data'] = json_decode($data['odontogram_data'], true);
+            $data['odontogram_data'] = json_encode($data['odontogram_data']);
+        }
 
         if ($this->patientModel->update($id, $data)) {
             return redirect()->to('/patients')->with('success', 'Paciente atualizado');
