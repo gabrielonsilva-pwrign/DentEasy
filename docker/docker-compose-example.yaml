@@ -4,7 +4,7 @@ services:
   dentEasy:
     image: ghcr.io/gabrielonsilva-pwrign/denteasy:main
     volumes:
-      - denteasy_files:/var/www/html/public/uploads
+      - denteasy_files:/var/www/html/denteasy/public/uploads
     restart: "unless-stopped"
     depends_on:
       - denteasydb

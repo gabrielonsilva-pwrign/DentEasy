@@ -63,10 +63,10 @@ echo "Checking database connection..."
 check_database_connection
 
 # Executa as migrações
-#run_migrations
+run_migrations
 
 # Executa o seeding (apenas uma vez)
-#run_seeding
+run_seeding
 
 # Inicia o comando passado para o script (geralmente o Apache)
 echo "Starting the main application..."
