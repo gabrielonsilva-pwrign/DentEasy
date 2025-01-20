@@ -2,14 +2,10 @@
 
 set -e
 
-SOURCE_DIR=/var/www/html/denteasy
-MAX_RETRIES=30
-RETRY_INTERVAL=5
-
 # Função para executar as migrações
 run_migrations() {
     echo "Running database migrations..."
-    php $SOURCE_DIR/spark migrate --force
+    php spark migrate
     if [ $? -ne 0 ]; then
         echo "Migration failed. Check the database connection and try again."
         exit 1
@@ -19,11 +15,11 @@ run_migrations() {
 # Função para executar o seeding
 run_seeding() {
     echo "Checking if seeding is necessary..."
-    if [ ! -f "$SOURCE_DIR/.seeding_completed" ]; then
+    if [ ! -f ".seeding_completed" ]; then
         echo "Running database seeding..."
-        php $SOURCE_DIR/spark db:seed MainSeeder
+        php spark db:seed MainSeeder
         if [ $? -eq 0 ]; then
-            touch "$SOURCE_DIR/.seeding_completed"
+            touch .seeding_completed
         else
             echo "Seeding failed. Check the logs for more information."
             exit 1
@@ -33,6 +29,8 @@ run_seeding() {
     fi
 }
 
+# Muda para o diretório da aplicação
+cd /var/www/html/denteasy
 
 # Executa as migrações
 run_migrations
