@@ -51,6 +51,8 @@
 <?= $this->endSection() ?>
 
 <?= $this->section('scripts') ?>
+<script src="/scripts/jquery.odontogram.js"></script>
+
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         Inputmask({"mask": "999.999.999-99"}).mask(document.getElementById("cpf"));
