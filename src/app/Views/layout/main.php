@@ -6,6 +6,7 @@
     <title>DentEasy</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.2/main.min.css" rel="stylesheet">
+    <link href="<?=base_url()?>/scripts/style.css" rel="stylesheet">
 </head>
 <body class="d-flex flex-column">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -109,7 +110,7 @@
 
     </div>
             <footer class="mt-4 bg-light text-dark">
-            <p class="text-center fs-6">DentEasy &copy; <?php echo date('Y')?> - <a href="https://github.com/gabrielonsilva-pwrign/DentEasy" target="_blank">v.1.1.2</a> 
+            <p class="text-center fs-6">DentEasy &copy; <?php echo date('Y')?> - <a href="https://github.com/gabrielonsilva-pwrign/DentEasy" target="_blank">v.1.1.3</a> 
             | Desenvolvido por <a href="https://poweriguana.com.br" target="_blank">Power Iguana</a></p>
         </footer>
     <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.2/main.min.js"></script>

@@ -39,11 +39,21 @@
         <label for="medical_history" class="form-label">Histórico Médico</label>
         <textarea class="form-control" id="medical_history" name="medical_history"><?= $patient['medical_history'] ?></textarea>
     </div>
+
+    <h2>Odontograma</h2>
+    <div id="odontogram-container">
+        <div id="odontogram" class="odontogram"></div>
+    </div>
+    <input type="hidden" name="odontogram_data" id="odontogram_data" value="<?= htmlspecialchars($patient['odontogram_data'] ?? '{}') ?>">
+
     <button type="submit" class="btn btn-primary">Atualizar Paciente</button>
 </form>
+
+
 <?= $this->endSection() ?>
 
 <?= $this->section('scripts') ?>
+<script src="<?=base_url()?>/scripts/jquery.odontogram.js"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         Inputmask({"mask": "999.999.999-99"}).mask(document.getElementById("cpf"));

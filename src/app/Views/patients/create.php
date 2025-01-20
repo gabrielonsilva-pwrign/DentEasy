@@ -39,6 +39,13 @@
         <label for="medical_history" class="form-label">Histórico Médico</label>
         <textarea class="form-control" id="medical_history" name="medical_history"></textarea>
     </div>
+
+    <h2>Odontograma</h2>
+    <div id="odontogram-container">
+        <div id="odontogram" class="odontogram"></div>
+    </div>
+    <input type="hidden" name="odontogram_data" id="odontogram_data" value="{}">
+
     <button type="submit" class="btn btn-primary">Adicionar Paciente</button>
 </form>
 <?= $this->endSection() ?>
