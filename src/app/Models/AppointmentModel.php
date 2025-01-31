@@ -20,7 +20,7 @@ class AppointmentModel extends Model
 
     public function getAppointmentsForCalendar()
     {
-        return $this->select('appointments.id, appointments.title, appointments.start_time as start, appointments.end_time as end, patients.name as patient_name')
+        return $this->select('appointments.id, appointments.start_time as start, appointments.end_time as end, patients.name as title')
                     ->join('patients', 'patients.id = appointments.patient_id')
                     ->findAll();
     }
