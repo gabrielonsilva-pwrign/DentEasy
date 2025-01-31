@@ -8,7 +8,7 @@ class PatientModel extends Model
 {
     protected $table = 'patients';
     protected $primaryKey = 'id';
-    protected $allowedFields = ['name', 'email', 'cpf', 'gender', 'birth_date', 'mobile_phone', 'address', 'medical_history', 'odontogram_data'];
+    protected $allowedFields = ['name', 'email', 'cpf', 'gender', 'birth_date', 'mobile_phone', 'address', 'medical_history', 'odontogram_data','dental_budget'];
     protected $useTimestamps = true;
     protected $validationRules = [
         'name' => 'required|min_length[3]|max_length[255]',

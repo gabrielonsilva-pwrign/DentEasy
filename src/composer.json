@@ -4,7 +4,8 @@
   "type": "project",
   "require": {
     "php": "^7.4 || ^8.0",
-    "codeigniter4/framework": "^4.2"
+    "codeigniter4/framework": "^4.2",
+    "tinymce/tinymce": "^7.6"
   },
   "autoload": {
     "psr-4": {

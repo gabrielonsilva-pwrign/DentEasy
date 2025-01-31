@@ -29,7 +29,7 @@
     </div>
     <div class="mb-3">
         <label for="description" class="form-label">Descrição</label>
-        <textarea class="form-control" id="description" name="description"></textarea>
+        <textarea class="form-control tinymce" id="description" name="description"></textarea>
     </div>
     <div class="mb-3">
         <label for="status" class="form-label">Status</label>
@@ -41,4 +41,21 @@
     </div>
     <button type="submit" class="btn btn-primary">Adicionar Agendamento</button>
 </form>
+<?= $this->endSection() ?>
+<?= $this->section('scripts') ?>
+<script src="/scripts/tinymce.min.js" referrerpolicy="origin"></script>
+<script>
+    tinymce.init({
+        selector: '.tinymce',
+        license_key: 'gpl',
+        language: 'pt_BR',
+        height: 300,
+        menubar: false,
+        plugins: 'advlist autolink lists link charmap preview searchreplace visualblocks code fullscreen table help wordcount',
+        toolbar: 'undo redo | formatselect | ' +
+        'bold italic backcolor | alignleft aligncenter ' +
+        'alignright alignjustify | bullist numlist outdent indent | ' +
+        'removeformat | help',
+    });
+</script>
 <?= $this->endSection() ?>

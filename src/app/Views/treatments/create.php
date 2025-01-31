@@ -27,7 +27,7 @@
     </div>
     <div class="mb-3">
         <label for="notes" class="form-label">Notas</label>
-        <textarea class="form-control" id="notes" name="notes"></textarea>
+        <textarea class="form-control tinymce" id="notes" name="notes"></textarea>
     </div>
     <h3>Itens Usados</h3>
     <?php foreach ($inventory_items as $item): ?>
@@ -43,4 +43,21 @@
     </div>
     <button type="submit" class="btn btn-primary">Adicionar Tratamento</button>
 </form>
+<?= $this->endSection() ?>
+<?= $this->section('scripts') ?>
+<script src="/scripts/tinymce.min.js" referrerpolicy="origin"></script>
+<script>
+    tinymce.init({
+        selector: '.tinymce',
+        license_key: 'gpl',
+        language: 'pt_BR',
+        height: 300,
+        menubar: false,
+        plugins: 'advlist autolink lists link charmap preview searchreplace visualblocks code fullscreen table help wordcount',
+        toolbar: 'undo redo | formatselect | ' +
+        'bold italic backcolor | alignleft aligncenter ' +
+        'alignright alignjustify | bullist numlist outdent indent | ' +
+        'removeformat | help',
+    });
+</script>
 <?= $this->endSection() ?>
