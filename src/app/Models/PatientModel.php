@@ -8,11 +8,11 @@ class PatientModel extends Model
 {
     protected $table = 'patients';
     protected $primaryKey = 'id';
-    protected $allowedFields = ['name', 'email', 'cpf', 'gender', 'birth_date', 'mobile_phone', 'address', 'medical_history', 'odontogram_data'];
+    protected $allowedFields = ['name', 'email', 'cpf', 'gender', 'birth_date', 'mobile_phone', 'address', 'medical_history', 'odontogram_data','dental_budget'];
     protected $useTimestamps = true;
     protected $validationRules = [
         'name' => 'required|min_length[3]|max_length[255]',
-        'email' => 'required|valid_email|is_unique[patients.email,id,{id}]',
+        'email' => 'required|valid_email',
         'cpf' => 'required|exact_length[14]|is_unique[patients.cpf,id,{id}]',
         'gender' => 'required|in_list[Homem,Mulher,Outros]',
         'birth_date' => 'required|valid_date',

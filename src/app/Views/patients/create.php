@@ -37,9 +37,12 @@
     </div>
     <div class="mb-3">
         <label for="medical_history" class="form-label">Histórico Médico</label>
-        <textarea class="form-control" id="medical_history" name="medical_history"></textarea>
+        <textarea class="form-control tinymce" id="medical_history" name="medical_history"></textarea>
     </div>
-
+    <div class="mb-3">
+        <label for="dental_budget" class="form-label">Orçamento Dentário</label>
+        <textarea class="form-control tinymce" id="dental_budget" name="dental_budget"></textarea>
+    </div>
     <h2>Odontograma</h2>
     <div id="odontogram-container">
         <div id="odontogram" class="odontogram"></div>
@@ -52,11 +55,25 @@
 
 <?= $this->section('scripts') ?>
 <script src="/scripts/jquery.odontogram.js"></script>
-
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         Inputmask({"mask": "999.999.999-99"}).mask(document.getElementById("cpf"));
         Inputmask({"mask": "(99) 9 9999-9999", "placeholder": "(  )   ____-____"}).mask(document.getElementById("mobile_phone"));
+    });
+</script>
+<script src="/scripts/tinymce.min.js" referrerpolicy="origin"></script>
+<script>
+    tinymce.init({
+        selector: '.tinymce',
+        license_key: 'gpl',
+        language: 'pt_BR',
+        height: 300,
+        menubar: false,
+        plugins: 'advlist autolink lists link charmap preview searchreplace visualblocks code fullscreen table help wordcount',
+        toolbar: 'undo redo | formatselect | ' +
+        'bold italic backcolor | alignleft aligncenter ' +
+        'alignright alignjustify | bullist numlist outdent indent | ' +
+        'removeformat | help',
     });
 </script>
 <?= $this->endSection() ?>
