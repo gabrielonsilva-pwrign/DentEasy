@@ -28,7 +28,7 @@
             <td><?= $user['id'] ?></td>
             <td><?= $user['name'] ?></td>
             <td><?= $user['email'] ?></td>
-            <td><?= $user['group_id'] ?></td>
+            <td><?= $user['group_name'] ?></td>
             <td>
             <?php
                 if (isset($permissions['users']) && in_array('edit', $permissions['users'])):

@@ -1,13 +1,13 @@
 <?php return array(
     'root' => array(
         'name' => 'power-iguana/denteasy-app',
-        'pretty_version' => '1.1.4.x-dev',
-        'version' => '1.1.4.9999999-dev',
-        'reference' => 'c5d271531bf0a4bad14cc26af2112aba2a3e2add',
+        'pretty_version' => '1.1.6.x-dev',
+        'version' => '1.1.6.9999999-dev',
+        'reference' => '9c113c72b557462a123f6f31b50261e70d3dba8f',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'dev' => true,
+        'dev' => false,
     ),
     'versions' => array(
         'codeigniter4/framework' => array(
@@ -29,9 +29,9 @@
             'dev_requirement' => false,
         ),
         'power-iguana/denteasy-app' => array(
-            'pretty_version' => '1.1.4.x-dev',
-            'version' => '1.1.4.9999999-dev',
-            'reference' => 'c5d271531bf0a4bad14cc26af2112aba2a3e2add',
+            'pretty_version' => '1.1.6.x-dev',
+            'version' => '1.1.6.9999999-dev',
+            'reference' => '9c113c72b557462a123f6f31b50261e70d3dba8f',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
