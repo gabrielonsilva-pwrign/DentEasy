@@ -10,9 +10,9 @@ O compose foi criado para trabalhar com SWARM. Adapte conforme necessário caso 
 
 ### Variáveis ENV Aplicação
 
-- **admin_name**: "${Admin_Name}" # Nome do usuário Administrador
-- **admin_email**: "${Admin_Email}" # Email do usuário Administrador
-- **admin_password**: "${Admin_Passowrd}" # Senha do Usuário Administrador
+- **admin_name**: ${Admin_Name} # Nome do usuário Administrador
+- **admin_email**: ${Admin_Email} # Email do usuário Administrador
+- **admin_password**: ${Admin_Password} # Senha do Usuário Administrador
 - **database_default_password**: ${DB_Password} # Senha do Banco de Dados (Mesma de Env Database)
 - **app_baseURL**: "${App_URL}" # URL da plataforma (https://exemplo.com.br)
 
@@ -41,6 +41,8 @@ O compose foi criado para trabalhar com SWARM. Adapte conforme necessário caso 
 - **Operações CRUD**: criar, ler, atualizar e excluir registros de pacientes.
 - **Pesquisar**: pesquisar pacientes por nome, e-mail ou CPF.
 - **Histórico de Tratamento**: Veja o histórico de tratamento de cada paciente.
+- **Orçamento Dentário**: Mantenha um orçamento vinculado ao seu paciente.
+- **Odontograma**: Crie um odontograma personalizado para cada paciente.
 
 ### 5. Agendamentos
 
@@ -71,6 +73,11 @@ O compose foi criado para trabalhar com SWARM. Adapte conforme necessário caso 
 
 - **Gerenciamento de webhook**: Gerenciar configurações de webhook para integrações externas.
 - **Notificações de compromissos**: envie notificações de webhook para novos compromissos.
+
+### 10. Backups
+
+- **Backup Instantâneo**: Crie um backup completo do seu banco de dados e uploads.
+- **Upload de Backup**: Realize um upload do seu zip e recupere o seu ambiente.
 
 ## Principais funções e métodos
 
@@ -163,6 +170,15 @@ O compose foi criado para trabalhar com SWARM. Adapte conforme necessário caso 
 - `Api::delete($id)`: Exclui um webhook.
 - `Api::sendWebhook($data)`: Envia notificação de webhook.
 
+### Backups
+
+- `Backup::index()`: Lista todos os backups realizados.
+- `Backup::instantBackup()`: Realiza um backup instantâneo.
+- `Backup::runAsyncBackup($filename)`: Gera um arquivo .zip com o banco de dados e a pasta uploads.
+- `Backup::downloadBackup($id)`: Realiza o download do arquivo .zip.
+- `Backup::importBackup()`: Realiza a importação de um backup .zip.
+- `Backup::runAsyncImport($filename)`: Descomprime o arquivo de backup e substitui o banco de dados.
+
 ## Recursos adicionais
 
 - **Mascaramento de entrada**: Campos de CPF e telefone celular usam máscaras de entrada para entrada de dados consistente.
@@ -171,6 +187,7 @@ O compose foi criado para trabalhar com SWARM. Adapte conforme necessário caso 
 - **Uploads de arquivo**: O módulo de tratamentos permite uploads e gerenciamento de arquivos.
 - **Controle de acesso baseado em função**: as permissões do usuário são gerenciadas por meio de atribuições de grupo.
 - **Cache**: o Dashboard implementa o cache para melhorar o desempenho.
+- **TinyMCE**: Campos de textos longos permitem entrada de textos personalizados.
 
 ## Dependências
 
@@ -180,3 +197,4 @@ O compose foi criado para trabalhar com SWARM. Adapte conforme necessário caso 
 - FullCalendar (para visualização do calendário de compromissos)
 - JQuery
 - Boostrap
+- TinyMCE
