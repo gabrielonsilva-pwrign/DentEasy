@@ -62,7 +62,8 @@
                                 if (
                                     (isset($permissions['users']) && in_array('view', $permissions['users'])) || 
                                     (isset($permissions['groups']) && in_array('view', $permissions['groups'])) || 
-                                    (isset($permissions['api']) && in_array('view', $permissions['api']))
+                                    (isset($permissions['api']) && in_array('view', $permissions['api'])) ||
+                                    (isset($permissions['backup']) && in_array('view', $permissions['backup']))
                                     ):
                     ?>
                     <li class="nav-item dropdown">
