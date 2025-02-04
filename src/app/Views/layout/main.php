@@ -83,6 +83,11 @@
                             ?>
                             <a class="dropdown-item" href="/api">API</a>
                             <?php endif; ?>
+                            <?php
+                                if (isset($permissions['backup']) && in_array('view', $permissions['backup'])):
+                            ?>
+                            <a class="dropdown-item" href="/backup">Backup</a>
+                            <?php endif; ?>
                         </div>
                     </li>
                     <?php endif; ?>
@@ -110,7 +115,7 @@
 
     </div>
             <footer class="mt-4 bg-light text-dark">
-            <p class="text-center fs-6">DentEasy &copy; <?php echo date('Y')?> - <a href="https://github.com/gabrielonsilva-pwrign/DentEasy" target="_blank">v.1.1.4</a> 
+            <p class="text-center fs-6">DentEasy &copy; <?php echo date('Y')?> - <a href="https://github.com/gabrielonsilva-pwrign/DentEasy" target="_blank">v.1.1.5</a> 
             | Desenvolvido por <a href="https://poweriguana.com.br" target="_blank">Power Iguana</a></p>
         </footer>
     <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.2/main.min.js"></script>

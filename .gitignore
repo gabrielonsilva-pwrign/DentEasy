@@ -5,6 +5,7 @@ src/writable/debugbar/*
 src/writable/logs/*
 src/writable/session/*
 src/public/uploads/*
+src/writable/backups/*
 .DS_Store
 src/deploy.sh
 docker/docker-compose.yaml

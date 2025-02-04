@@ -32,6 +32,7 @@ RUN mkdir -p /var/www/.composer \
     /var/www/html/denteasy/writable/cache \
     /var/www/html/denteasy/writable/session \
     /var/www/html/denteasy/writable/debugbar \
+    /var/www/html/denteasy/writable/backups \
     /var/www/html/denteasy/public/uploads \
     && chown -R www-data:www-data /var/www/html /var/www/.composer \
     && chmod -R 755 /var/www/html /var/www/.composer \

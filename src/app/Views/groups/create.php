@@ -23,7 +23,8 @@
         ['Name' => 'Usuários', 'Module' => 'users'],
         ['Name' => 'Dashboard', 'Module' => 'dashboard'],
         ['Name' => 'Webhooks', 'Module' => 'api'],
-        ['Name' => 'Pacientes', 'Module' => 'patients']
+        ['Name' => 'Pacientes', 'Module' => 'patients'],
+        ['Name' => 'Backups', 'Module' => 'backup']
     ];
     foreach ($modules as $module):
     ?>
