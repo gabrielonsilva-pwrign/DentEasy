@@ -19,7 +19,10 @@ class Users extends BaseController
     public function index()
     {
         $this->checkPermission('users','view');
-        $data['users'] = $this->userModel->findAll();
+        $users = $this->userModel->select('users.*, groups.name as group_name')
+                                 ->join('groups', 'groups.id = users.group_id')
+                                 ->findAll();
+        $data['users'] = $users;
         return view('users/index', $data);
     }
 

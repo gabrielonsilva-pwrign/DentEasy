@@ -258,6 +258,6 @@
             "install-path": "../tinymce/tinymce"
         }
     ],
-    "dev": true,
+    "dev": false,
     "dev-package-names": []
 }

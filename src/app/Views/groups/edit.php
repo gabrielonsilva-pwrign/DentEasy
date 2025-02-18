@@ -8,6 +8,8 @@
         <input type="text" class="form-control" id="name" name="name" value="<?= $group['name'] ?>" required>
     </div>
     <h3>Permissões</h3>
+    <div class="row">
+    <div class="col-md-6">
     <?php
     $actions = [
         ['Name' => 'Visualizar', 'Action' => 'view'],
@@ -23,9 +25,11 @@
         ['Name' => 'Usuários', 'Module' => 'users'],
         ['Name' => 'Dashboard', 'Module' => 'dashboard'],
         ['Name' => 'Webhooks', 'Module' => 'api'],
-        ['Name' => 'Pacientes', 'Module' => 'patients']
+        ['Name' => 'Pacientes', 'Module' => 'patients'],
+        ['Name' => 'Backups', 'Module' => 'backup']
     ];
-    foreach ($modules as $module):
+    foreach ($modules as $index => $module):
+        if ($index % 2 == 0 && $index != 0) echo '</div><div class="col-md-6">';
     ?>
         <h4><?= ucfirst($module['Name']) ?></h4>
         <?php foreach ($actions as $action): ?>
@@ -38,6 +42,7 @@
             </div>
         <?php endforeach; ?>
     <?php endforeach; ?>
+    </div></div>
     <button type="submit" class="btn btn-primary mt-3">Atualizar Grupo</button>
 </form>
 <?= $this->endSection() ?>
