@@ -110,3 +110,15 @@ $routes->group('', ['filter' => 'auth'], function($routes) {
         $routes->post('import', 'Backup::importBackup');
     });
 });
+
+
+$routes->get('portal', 'PatientAuth::login');
+$routes->post('portal', 'PatientAuth::attemptLogin');
+$routes->get('patient-logout', 'PatientAuth::logout');
+
+$routes->group('my', ['filter' => 'patientAuth'], function($routes) {
+    $routes->get('', 'PatientPortal::index');
+    $routes->get('personal', 'PatientPortal::personalData');
+    $routes->get('history', 'PatientPortal::treatmentHistory');
+    $routes->get('appointments', 'PatientPortal::appointments');
+});
