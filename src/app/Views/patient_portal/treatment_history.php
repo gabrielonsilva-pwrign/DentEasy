@@ -12,7 +12,7 @@
     <tbody>
         <?php foreach ($treatments as $treatment): ?>
         <tr>
-            <td><?= esc($treatment['created_at']) ?></td>
+            <td><?= date('d/m/Y', strtotime($treatment['start_time'])) ?> - <?= date('H:i', strtotime($treatment['start_time'])) ?></td>
             <td><?= esc($treatment['title']) ?></td>
         </tr>
         <?php endforeach; ?>

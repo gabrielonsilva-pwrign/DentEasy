@@ -6,9 +6,9 @@
     <div class="col-md-6">
         <h2>Acesso Rápido</h2>
         <ul>
-            <li><a href="<?= site_url('patient-portal/personal-data') ?>">Meus Dados</a></li>
-            <li><a href="<?= site_url('patient-portal/treatment-history') ?>">Histórico de Atendimento</a></li>
-            <li><a href="<?= site_url('patient-portal/appointments') ?>">Próximos Atendimentos</a></li>
+            <li><a href="/my/personal">Meus Dados</a></li>
+            <li><a href="/my/history">Histórico de Atendimento</a></li>
+            <li><a href="/my/appointments">Próximos Atendimentos</a></li>
         </ul>
     </div>
     <div class="col-md-6">

@@ -19,9 +19,5 @@
         <th>Endereço</th>
         <td><?= esc($patient['address']) ?></td>
     </tr>
-    <tr>
-        <th>Plano Dentário</th>
-        <td><?= esc($patient['dental_budget'] ?? 'Não definido') ?></td>
-    </tr>
 </table>
 <?= $this->endSection() ?>

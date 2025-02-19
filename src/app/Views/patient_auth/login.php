@@ -1,10 +1,9 @@
-<?= $this->extend('layout/main') ?>
+<?= $this->extend('layout/patient_portal') ?>
 
 <?= $this->section('content') ?>
 <div class="row justify-content-center">
     <div class="col-md-6">
         <h1 class="mb-4">Portal do Paciente</h1>
-        <?= view('shared/shared_block') ?>
         <form action="/portal" method="post">
             
             <div class="mb-3">

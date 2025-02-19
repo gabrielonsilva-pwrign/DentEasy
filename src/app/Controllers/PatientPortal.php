@@ -57,9 +57,14 @@ class PatientPortal extends BaseController
             throw new PageNotFoundException('Patient not found');
         }
 
-        $data['treatments'] = $this->treatmentModel->where('patient_id', $patientId)
-                                                   ->orderBy('created_at', 'DESC')
+        $data['treatments'] = $this->treatmentModel->join('appointments', 'appointments.id = treatments.appointment_id')
+                                                   ->join('patients', 'patients.id = appointments.patient_id')
+                                                   ->where('patients.id', $patientId)
+                                                   ->orderBy('appointments.start_time', 'DESC')
                                                    ->findAll();
+
+
+        
 
         return view('patient_portal/treatment_history', $data);
     }
