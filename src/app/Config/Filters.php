@@ -53,6 +53,6 @@ class Filters extends BaseConfig
             'users/*',
             'backup/*',
         ]],
-        'patientAuth' => ['before' => ['/','paciente/*']],
+        'patientAuth' => ['before' => ['/','my/*']],
     ];
 }
