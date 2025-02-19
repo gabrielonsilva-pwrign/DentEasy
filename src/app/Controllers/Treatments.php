@@ -47,8 +47,6 @@ class Treatments extends BaseController
     public function create()
     {
         $data = $this->request->getPost();
-
-        log_message('debug', 'Treatment data: ' . print_r($data, true));
         
         $this->databaseConnection->transStart();
         
