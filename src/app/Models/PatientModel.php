@@ -14,7 +14,7 @@ class PatientModel extends Model
         'name' => 'required|min_length[3]|max_length[255]',
         'email' => 'required|valid_email',
         'cpf' => 'required|exact_length[14]|is_unique[patients.cpf,id,{id}]',
-        'gender' => 'required|in_list[Homem,Mulher,Outros]',
+        'gender' => 'required|in_list[Masculino,Feminino,Outros]',
         'birth_date' => 'required|valid_date',
         'mobile_phone' => 'required|min_length[16]|max_length[16]',
         'id' => 'max_length[19]'

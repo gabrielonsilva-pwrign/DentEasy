@@ -18,8 +18,8 @@
     <div class="mb-3">
         <label for="gender" class="form-label">Genero</label>
         <select class="form-control" id="gender" name="gender" required>
-            <option value="Homem" <?= $patient['gender'] == 'Homem' ? 'selected' : '' ?>>Homem</option>
-            <option value="Mulher" <?= $patient['gender'] == 'Mulher' ? 'selected' : '' ?>>Mulher</option>
+            <option value="Masculino" <?= $patient['gender'] == 'Masculino' ? 'selected' : '' ?>>Homem</option>
+            <option value="Feminino" <?= $patient['gender'] == 'Feminino' ? 'selected' : '' ?>>Mulher</option>
             <option value="Outros" <?= $patient['gender'] == 'Outros' ? 'selected' : '' ?>>Outros</option>
         </select>
     </div>

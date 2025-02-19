@@ -13,7 +13,7 @@ class TreatmentModel extends Model
     protected $validationRules = [
         'appointment_id' => 'required|integer',
         'value' => 'required|numeric',
-        'payment_method' => 'required|in_list[Dinheiro,Credito,Debito,Convenio]'
+        'payment_method' => 'required|in_list[Dinheiro,Credito,Debito,Convenio]',
     ];
 
     public function getTreatmentsWithPatientInfo()

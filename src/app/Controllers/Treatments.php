@@ -46,7 +46,6 @@ class Treatments extends BaseController
 
     public function create()
     {
-        $this->checkPermission('treatments','add');
         $data = $this->request->getPost();
         
         $this->databaseConnection->transStart();

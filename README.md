@@ -79,6 +79,17 @@ O compose foi criado para trabalhar com SWARM. Adapte conforme necessário caso 
 - **Backup Instantâneo**: Crie um backup completo do seu banco de dados e uploads.
 - **Upload de Backup**: Realize um upload do seu zip e recupere o seu ambiente.
 
+### 11. Portal do Paciente
+
+- **Acesso aos Dados**: O paciente consegue visualizar seus dados cadastrados. 
+- **Agendamentos**: O Paciente pode consultar seus próximos agendamentos. 
+- **Tratamentos**: O Paciente pode consultar seu histórico de tratamentos. 
+
+## Rotas
+
+- **${App_URL}/login**: Página de login inicial para administradores.
+- **${App_URL}/portal**: Página de login inicial para pacientes.
+
 ## Principais funções e métodos
 
 ### Autenticação
@@ -178,6 +189,21 @@ O compose foi criado para trabalhar com SWARM. Adapte conforme necessário caso 
 - `Backup::downloadBackup($id)`: Realiza o download do arquivo .zip.
 - `Backup::importBackup()`: Realiza a importação de um backup .zip.
 - `Backup::runAsyncImport($filename)`: Descomprime o arquivo de backup e substitui o banco de dados.
+
+### Autenticação do Paciente
+
+- `PatientAuth::login()`: Página inicial de Login do Paciente.
+- `PatientAuth::attemptLogin()`: Realiza a validação e login do Paciente, pelo e-mail e CPF.
+- `PatientAuth::setPatientSession()`: Monta a sessão com os dados do Paciente.
+- `PatientAuth::validateCPF()`: Valida o CPF do paciente par realizar o login.
+- `PatientAuth::logout()`: Processa o logout do Paciente.
+
+### Portal do Paciente
+
+- `PatientPortal::index()`: Exibe acesso rápido aos dados e agendamentos do Paciente.
+- `PatientPortal::personalData()`: Exibe os dados em apenas leitura do Paciente.
+- `PatientPortal::treatmentHistory()`: Exibe os tratamentos em apenas leitura do Paciente.
+- `PatientPortal::appointments()`: Lista futuros agendamentos do Paciente.
 
 ## Recursos adicionais
 

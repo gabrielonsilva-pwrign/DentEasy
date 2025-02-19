@@ -10,6 +10,7 @@ use CodeIgniter\Filters\InvalidChars;
 use CodeIgniter\Filters\SecureHeaders;
 use App\Filters\AuthFilter;
 use App\Filters\PermissionFilter;
+use App\Filters\PatientAuthFilter;
 
 class Filters extends BaseConfig
 {
@@ -21,6 +22,7 @@ class Filters extends BaseConfig
         'secureheaders' => SecureHeaders::class,
         'auth'          => AuthFilter::class,
         'permission'    => PermissionFilter::class,
+        'patientAuth'   => PatientAuthFilter::class,
     ];
 
     public $globals = [
@@ -47,8 +49,10 @@ class Filters extends BaseConfig
             'treatments/*', 
             'inventory/*', 
             'api/*', 
-            'admin/users/*', 
-            'admin/groups/*'
+            'groups/*',
+            'users/*',
+            'backup/*',
         ]],
+        'patientAuth' => ['before' => ['/','my/*']],
     ];
 }

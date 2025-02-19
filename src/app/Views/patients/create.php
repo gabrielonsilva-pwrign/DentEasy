@@ -18,8 +18,8 @@
     <div class="mb-3">
         <label for="gender" class="form-label">Genero</label>
         <select class="form-control" id="gender" name="gender" required>
-            <option value="Homem">Homem</option>
-            <option value="Mulher">Mulher</option>
+            <option value="Masculino">Homem</option>
+            <option value="Feminino">Mulher</option>
             <option value="Outros">Outros</option>
         </select>
     </div>
