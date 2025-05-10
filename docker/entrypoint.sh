@@ -45,7 +45,7 @@ run_seeding() {
         echo "Running database seeding..."
         php spark db:seed MainSeeder
         if [ $? -eq 0 ]; then
-            touch .seeding_completed
+            touch /var/www/html/denteasy/.seeding_completed
         else
             echo "Seeding failed. Check the logs for more information."
             exit 1

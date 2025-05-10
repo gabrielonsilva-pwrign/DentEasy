@@ -36,7 +36,8 @@ RUN mkdir -p /var/www/.composer \
     /var/www/html/denteasy/public/uploads \
     && chown -R www-data:www-data /var/www/html /var/www/.composer \
     && chmod -R 755 /var/www/html /var/www/.composer \
-    && chmod +x /usr/local/bin/entrypoint.sh
+    && chmod +x /usr/local/bin/entrypoint.sh \
+    && chmod +x /var/wwww/html/denteasy/spark
 
 RUN a2enmod rewrite headers proxy_http
 
