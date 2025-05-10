@@ -51,6 +51,15 @@ class AppointmentModel extends Model
                     ->findAll();
     }
 
+    public function getAppointmentsForTreatment()
+    {
+        return $this->select('appointments.*, patients.name as patient_name')
+                    ->join('patients', 'patients.id = appointments.patient_id')
+                    ->where('appointments.status', 'Agendado')
+                    ->orderBy('appointments.start_time', 'ASC')
+                    ->findAll();
+    }
+
     public function getAppointmentsWithPatientInfo()
     {
         return $this->select('appointments.*, patients.name as patient_name, patients.email, patients.mobile_phone')

@@ -39,7 +39,7 @@ class Treatments extends BaseController
     public function new()
     {
         $this->checkPermission('treatments','add');
-        $data['appointments'] = $this->appointmentModel->getUpcomingAppointments();
+        $data['appointments'] = $this->appointmentModel->getAppointmentsForTreatment();
         $data['inventory_items'] = $this->inventoryModel->findAll();
         return view('treatments/create', $data);
     }
