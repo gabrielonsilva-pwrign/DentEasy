@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/11.5/phpunit.xsd"
+         bootstrap="vendor/codeigniter4/framework/system/Test/bootstrap.php"
+         colors="true"
+         stopOnFailure="false">
+  
+  <!-- Relatórios -->
+  <logging>
+    <junit outputFile="build/reports/junit.xml"/>
+    <testdoxHtml outputFile="build/reports/testdox.html"/>
+    <testdoxText outputFile="build/reports/testdox.txt"/>
+  </logging>
+
+  <!-- Cobertura de Código - Sintaxe Correta para PHPUnit 11.5 -->
+  <coverage>
+    <report>
+      <html outputDirectory="build/coverage"/>
+      <clover outputFile="build/logs/clover.xml"/>
+    </report>
+    <!-- A sintaxe correta é include/exclude diretamente em coverage -->
+    <include>
+      <directory suffix=".php">app</directory>
+    </include>
+    <exclude>
+      <directory>app/Config</directory>
+      <directory>app/Views</directory>
+      <directory>app/Language</directory>
+      <directory>vendor</directory>
+    </exclude>
+  </coverage>
+
+  <!-- Suites de Teste -->
+  <testsuites>
+    <testsuite name="Unit Tests">
+      <directory>./tests/Unit</directory>
+    </testsuite>
+    
+    <testsuite name="Feature Tests">
+      <directory>./tests/Feature</directory>
+    </testsuite>
+  </testsuites>
+
+  <!-- Configurações PHP -->
+  <php>
+    <env name="CI_ENVIRONMENT" value="testing"/>
+    <server name="app.baseURL" value="http://localhost/"/>
+  </php>
+</phpunit>

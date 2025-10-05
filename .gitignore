@@ -9,3 +9,5 @@ src/writable/backups/*
 .DS_Store
 src/deploy.sh
 docker/docker-compose.yaml
+src/.phpunit.result.cache
+build/

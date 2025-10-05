@@ -214,7 +214,7 @@ O compose foi criado para trabalhar com SWARM. Adapte conforme necessário caso 
 - **Controle de acesso baseado em função**: as permissões do usuário são gerenciadas por meio de atribuições de grupo.
 - **Cache**: o Dashboard implementa o cache para melhorar o desempenho.
 - **TinyMCE**: Campos de textos longos permitem entrada de textos personalizados.
-
+- **Testes Unitários**: testes de código com mock para assegurar funções. Execute `vendor/bin/unit --covarge-text --coverage-filter="app"` para um report completo.
 ## Dependências
 
 - CodeIgniter 4
